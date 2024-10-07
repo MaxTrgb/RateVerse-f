@@ -35,7 +35,7 @@ const Footer = () => {
           Back to Top
         </button>
       )}
-      <p>© 2022 Denmap. All rights reserved.</p>
+      <p>© 2024 Denmap. All rights reserved.</p>
     </footer>
   );
 };

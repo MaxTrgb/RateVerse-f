@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
 
 .myHeader{
-    background-color: #00ADB5;
+    background-color: #9B3922;
     padding: 20px;
     padding-left: 40px;
     padding-right: 40px;
@@ -20,11 +20,11 @@
 }
 .myBody{
     padding: 20px;
-    text-align: center;
+  
     background-color: #EEEEEE;
 }
 .myFooter{
-    background-color:#00ADB5;
+    background-color:#9B3922;
     padding: 10px;
     text-align: center;
     color: white;
@@ -34,7 +34,7 @@
     width: 100%;
 }
 .myFooter button{
-    background-color: #00ADB5;
+    background-color: #9B3922;
     color: white;
     border: none;
     border-radius: 5px;
@@ -43,7 +43,7 @@
     cursor: pointer;
 } 
 .backToTopBtn:hover{
-    color: aqua;
+    color: gray;
 }
 .myTools{
     display: flex;
@@ -62,5 +62,5 @@
     background-color: #222831;
 }
 .sortBtn:hover{
-    background-color: #00ADB5 !important;
+    background-color: #9B3922 !important;
 }

@@ -5,7 +5,7 @@ import { Rate } from 'antd';
 
 const PostItem = ({ id, imgSrc, title, description, rating }) => {
     return (
-        <div className='postGrid'>
+        <div>
             <Link style={{ textDecoration: 'none' }} to={`/post/${id}`}>
                 <div className="card">
                     <div>

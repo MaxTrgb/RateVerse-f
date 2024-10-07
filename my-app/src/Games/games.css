@@ -1,10 +1,15 @@
+.postGrid{ 
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;  
+}
 .card{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;   
+    justify-content: space-evenly;
     border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #00ADB5;
+    box-shadow: 1px 1px 4px #9B3922;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -12,18 +17,22 @@
     margin-top: 30px;
     margin-bottom: 30px;
     transition: all 0.1s ease-in-out;
+    padding-left: 0;
+    padding-right: 0;
 }
 .card:hover{
-    box-shadow: 3px 3px 9px #00ADB5;
+    box-shadow: 3px 3px 9px #9B3922;
     transform: scale(1.01);
 }
 
 
 .card img{
-    width: 200px;
-    height: 200px;
+    width: 450px;
+    height: 450px;
+    max-width: fit-content;
     object-fit: fill;
     border-radius: 10px;
+    padding: 20px;
 }
 .card-details{
     display: flex;
@@ -31,6 +40,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    width: 50%;
 }
 .card-details h2{
     font-size: 24px;
@@ -58,7 +68,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #00ADB5;
+    box-shadow: 1px 1px 4px #9B3922;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -95,12 +105,12 @@
     background-color: #222831;
 }
 .feedbackBtn:hover{
-    background-color: #00ADB5 !important;
+    background-color: #9B3922 !important;
     color: white;
 }
 .backBtn:hover{
-    color: #00ADB5 !important;
-    border-color: #00ADB5 !important;
+    color: #9B3922 !important;
+    border-color: #9B3922 !important;
 }
 .feedbackContainer{    
     display: flex;
@@ -111,7 +121,7 @@
     margin-top: 30px;
     margin-bottom: 30px;
     border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #00ADB5;
+    box-shadow: 1px 1px 4px #9B3922;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
