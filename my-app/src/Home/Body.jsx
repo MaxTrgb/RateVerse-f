@@ -6,7 +6,7 @@ import Tools from '../Home/Tools';
 const Body = () => {
   return (
     <main className='myBody'>
-      <h2>Games</h2>
+      
       <Tools />
       <PostGrid />
     </main>

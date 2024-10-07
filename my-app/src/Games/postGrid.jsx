@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PostItem from './postItem';
+import './games.css';
 
 
 const PostGrid = () => {
@@ -40,7 +41,7 @@ const PostGrid = () => {
     }, [sortCriteria]);
 
     return (
-        <div >
+        <div className='postGrid' >
             {posts.map(post => (
                 <PostItem
                     key={post.id}
