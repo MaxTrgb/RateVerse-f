@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
+
+.myHeader{
+    background-color: #00ADB5;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo{
+    font-size: 34px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #222831;
+    font-family: protest strike;
+}
+.myBody{
+    padding: 20px;
+    text-align: center;
+    background-color: #EEEEEE;
+}
+.myFooter{
+    background-color:#00ADB5;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.myFooter button{
+    background-color: #00ADB5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+} 
+.backToTopBtn:hover{
+    color: aqua;
+}
+.myTools{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 20px;
+}
+.sort{
+    display: flex;  
+    justify-content: space-between;
+}
+.sortBtn{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #222831;
+}
+.sortBtn:hover{
+    background-color: #00ADB5 !important;
+}

@@ -1,0 +1,84 @@
+.registrationForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.field {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.loginForm input{
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.registrationForm input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+}
+
+.invalid {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.buttonGroup button {
+    width: 100px;
+    color: white;
+    background-color: #222831;
+}
+.buttonGroup button:hover {
+    background-color: #00ADB5;
+}
+.button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: darkgray;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
+
+.button:hover {
+    background-color: gray;
+}
+.footer{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.loginForm h2{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.footer button{
+    border-style: none;
+    background-color: transparent;
+    color: brown;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}

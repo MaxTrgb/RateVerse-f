@@ -1,0 +1,120 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #EEEEEE;
+    box-shadow: 1px 1px 4px #00ADB5;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: all 0.1s ease-in-out;
+}
+.card:hover{
+    box-shadow: 3px 3px 9px #00ADB5;
+    transform: scale(1.01);
+}
+
+
+.card img{
+    width: 200px;
+    height: 200px;
+    object-fit: fill;
+    border-radius: 10px;
+}
+.card-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.card-details h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black;
+}
+.card-details p{
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+/* Single Card  */
+
+.singleCardContainer{
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.singleCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #EEEEEE;
+    box-shadow: 1px 1px 4px #00ADB5;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: all 0.1s ease-in-out;
+}
+
+.singleCard img{
+    width: 400px;
+    height: 400px;
+    object-fit: fill;
+    border-radius: 10px;
+}
+.singleCard-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.singleCard-details h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: black;
+}
+.singleCard-details p{
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: gray;
+}
+.feedbackBtn{
+    background-color: #222831;
+}
+.feedbackBtn:hover{
+    background-color: #00ADB5 !important;
+    color: white;
+}
+.backBtn:hover{
+    color: #00ADB5 !important;
+    border-color: #00ADB5 !important;
+}
+.feedbackContainer{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #EEEEEE;
+    box-shadow: 1px 1px 4px #00ADB5;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    width: 500px;
+}
