@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
 
-.myHeader{
+.myHeader {
     background-color: #9B3922;
     padding: 20px;
     padding-left: 40px;
@@ -11,20 +11,22 @@
     justify-content: space-between;
     align-items: center;
 }
-.logo{
+
+.logo {
     font-size: 34px;
     font-weight: bold;
     text-decoration: none;
     color: #222831;
     font-family: protest strike;
 }
-.myBody{
+
+.myBody {
     padding: 20px;
-  
     background-color: #EEEEEE;
 }
-.myFooter{
-    background-color:#9B3922;
+
+.myFooter {
+    background-color: #9B3922;
     padding: 10px;
     text-align: center;
     color: white;
@@ -33,34 +35,38 @@
     left: 0;
     width: 100%;
 }
-.myFooter button{
-    background-color: #9B3922;
-    color: white;
+
+.backToTopBtn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    color: #9B3922;
     border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
+    padding: 10px 20px;
     cursor: pointer;
-} 
-.backToTopBtn:hover{
-    color: gray;
+    z-index: 100;
+    background-color: #EEEEEE;
 }
-.myTools{
+
+.myTools {
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 20px;
 }
-.sort{
-    display: flex;  
+
+.sort {
+    display: flex;
     justify-content: space-between;
 }
-.sortBtn{
+
+.sortBtn {
     margin-left: 10px;
     margin-right: 10px;
     background-color: #222831;
 }
-.sortBtn:hover{
+
+.sortBtn:hover {
     background-color: #9B3922 !important;
 }

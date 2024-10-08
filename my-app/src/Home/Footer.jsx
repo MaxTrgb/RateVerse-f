@@ -28,15 +28,17 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className='myFooter'>
-      
+    <div>
       {isVisible && (
-        <button onClick={scrollToTop} className="backToTopBtn">
-          Back to Top
+        <button onClick={scrollToTop} className="backToTopBtn">          
+          <img src="https://img.icons8.com/ios/50/000000/up.png" alt="" />
         </button>
       )}
-      <p>© 2024 Denmap. All rights reserved.</p>
-    </footer>
+      <footer className='myFooter'>
+        <p>© 2024 Denmap. All rights reserved.</p>
+      </footer>
+    </div>
+
   );
 };
 
