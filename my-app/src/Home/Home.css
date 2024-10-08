@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
-
+*{
+    font-family: protest strike;
+}
 .myHeader {
     background-color: #9B3922;
     padding: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 7%;
+    padding-right: 7%;
     text-align: center;
     color: white;
     display: flex;
@@ -12,33 +14,62 @@
     align-items: center;
 }
 
+.links{
+    display: flex;
+    gap: 100px;  
+}
+.links a{
+    text-decoration: none;
+    color: #EEEEEE;  
+    font-size: 25px;    
+}
+
 .logo {
-    font-size: 34px;
+    font-size: 50px;
     font-weight: bold;
     text-decoration: none;
-    color: #222831;
-    font-family: protest strike;
+    color: #222831;    
 }
 
 .myBody {
     padding: 20px;
     background-color: #EEEEEE;
+    padding-left: 6%;
+    padding-right: 6%;
 }
 
 .myFooter {
     background-color: #9B3922;
     padding: 10px;
-    text-align: center;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #222831;   
+    font-size: small;
 }
-
+.contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.social-icons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+.phone, a{
+    font-size: small;    
+    text-decoration: none;
+    color: #222831;
+   
+}
 .backToTopBtn {
     position: fixed;
-    bottom: 80px;
+    bottom:200px;
     right: 20px;
     color: #9B3922;
     border: none;
@@ -54,6 +85,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
+   
 }
 
 .sort {
