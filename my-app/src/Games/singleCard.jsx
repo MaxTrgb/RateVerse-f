@@ -81,7 +81,7 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                        <p>{post.genre}</p>
+                        <p className='genre'>{post.genre}</p>
                         <p>{post.description}</p>
 
                     </div>
