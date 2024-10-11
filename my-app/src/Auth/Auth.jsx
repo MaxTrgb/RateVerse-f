@@ -25,13 +25,14 @@ const Auth = () => {
                 type="primary"
                 shape="circle"
                 onClick={showModal}
-                icon={<UserOutlined />} 
-                style={{backgroundColor: '#222831'}}/>
+                icon={<UserOutlined style={{color: '#222831'}} />}
+                style={{backgroundColor: '#9B3922'}}/>
 
             <Modal                
                 open={isModalOpen}                
                 footer={null}
                 onCancel={() => setIsModalOpen(false)}
+                style={{ backgroundColor: '#222831', color: '#ffffff', borderRadius: '8px', padding: '0px' }}
             >
                 {isLoginForm ? <Login toggleForm={toggleForm} /> : <Registration toggleForm={toggleForm} />}
             </Modal>

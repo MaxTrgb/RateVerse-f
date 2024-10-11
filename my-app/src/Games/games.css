@@ -9,22 +9,20 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #9B3922;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: white;
+    background-color: #222831;
     margin-top: 30px;
     margin-bottom: 30px;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     padding-left: 0;
     padding-right: 0;
 }
 
 .card:hover {
-    box-shadow: 3px 3px 9px #9B3922;
-    transform: scale(1.01);
+    box-shadow: 0 8px 16px 0 #9B3922;
+    transform: scale(1.05);
 }
 
 
@@ -61,7 +59,7 @@
 /* Single Card  */
 
 .singleCardContainer {
-    background-color: #EEEEEE;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,13 +71,12 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 60%;
-    border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #9B3922;
+    width: 90%;
+    box-shadow: 0 8px 16px 0 #9B3922;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: white;
+    background-color: #222831;
     margin-top: 30px;
     margin-bottom: 30px;
     transition: all 0.1s ease-in-out;
@@ -114,39 +111,60 @@
 }
 
 .feedbackBtn {
-    background-color: #222831;
+    background-color: gray;
+    color: lightgray;
 }
 
 .feedbackBtn:hover {
     background-color: #9B3922 !important;
-    color: white;
+
+}
+
+.backBtn {
+    background-color: transparent !important;
+    border: none;
 }
 
 .backBtn:hover {
+
     color: #9B3922 !important;
-    border-color: #9B3922 !important;
+
 }
 
 .feedbackContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  
     gap: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
-    border: 1px solid #EEEEEE;
-    box-shadow: 1px 1px 4px #9B3922;
+    color: lightgray !important;
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: white;
-    width: 500px;
-    
+    background-color: #222831;
+    width: 90%;
+
 }
-.submittedFeedbacks{
+
+.feedbackContainer textarea {
+    background-color: #222831 !important;
+    border-color: lightgray !important;
+    color: gray !important;
+}
+.feedbackContainer textarea ::placeholder {
+    color: lightgray !important;
+}
+.submittedFeedbacks {
     margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    background-color: gray;
+    max-width: 100%;
+    padding: 20px;
+    padding-left: 140px;
     
+    border-radius: 10px;
+}
+.submittedFeedbacks p {
+    padding: 20px;
+    color: black;
 }

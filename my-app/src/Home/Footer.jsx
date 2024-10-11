@@ -33,7 +33,7 @@ const Footer = () => {
 
       {isVisible && (
         <button onClick={scrollToTop} className="backToTopBtn">
-          <img src="https://img.icons8.com/ios/50/000000/up.png" alt="" />
+          <img src="https://img.icons8.com/ios-glyphs/60/FFFFFF/circled-up.png" alt="" />
         </button>
       )}
 

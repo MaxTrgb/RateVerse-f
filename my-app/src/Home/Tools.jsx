@@ -7,10 +7,10 @@ const Tools = () => {
     return (
         <div className='myTools'>
             <div className='search'>
-            <Search
-                
-                placeholder="input search text"
+            <Search                
+                placeholder="Input search text..."
                 onSearch={value => console.log(value)} enterButton 
+                
             />
             </div>
             <div className='sort'>
