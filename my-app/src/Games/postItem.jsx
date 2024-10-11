@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './games.css';
 import { Rate } from 'antd';
 
-const PostItem = ({ id, imgSrc, title, description, rating }) => {
+const PostItem = ({ id, imgSrc, title,genre, description, rating }) => {
     return (
         <div>
             <Link style={{ textDecoration: 'none' }} to={`/post/${id}`}>
@@ -13,6 +13,7 @@ const PostItem = ({ id, imgSrc, title, description, rating }) => {
                     </div>
                     <div className="card-details">
                         <h2>{title}</h2>
+                        <p>{genre}</p>
                         <p>{description}</p>
                         <Rate disabled value={rating} />
                     </div>

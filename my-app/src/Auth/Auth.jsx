@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Button, Modal } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Registration from './Registration';
 import Login from './Login';
 import './Form.module.css';
 
-const Auth = () => {
+const Auth = forwardRef((_, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoginForm, setIsLoginForm] = useState(true);
 
-    const showModal = () => {
+   
+    const showModal = (isLogin) => {
+        setIsLoginForm(isLogin); 
         setIsModalOpen(true);
     };
 
-
+    useImperativeHandle(ref, () => ({
+        showModal,
+    }));
 
     const toggleForm = () => {
         setIsLoginForm(!isLoginForm);
-    }
+    };
+
     return (
         <>
             <Button
-                calssName="authBtn"
+                className="authBtn"
                 type="primary"
                 shape="circle"
-                onClick={showModal}
-                icon={<UserOutlined style={{color: '#222831'}} />}
-                style={{backgroundColor: '#9B3922'}}/>
+                onClick={() => showModal(true)}  
+                icon={<UserOutlined style={{ color: '#222831' }} />}
+                style={{ backgroundColor: '#9B3922' }}
+            />
 
-            <Modal                
-                open={isModalOpen}                
+            <Modal
+                open={isModalOpen}
                 footer={null}
                 onCancel={() => setIsModalOpen(false)}
                 style={{ backgroundColor: '#222831', color: '#ffffff', borderRadius: '8px', padding: '0px' }}
@@ -37,7 +43,7 @@ const Auth = () => {
                 {isLoginForm ? <Login toggleForm={toggleForm} /> : <Registration toggleForm={toggleForm} />}
             </Modal>
         </>
-    )
-}
+    );
+});
 
 export default Auth;
