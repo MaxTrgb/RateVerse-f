@@ -13,7 +13,7 @@ const Header = () => {
 
     return (
         <header className='myHeader'>
-            <Link to='/' className='logo'>Denmap</Link>
+            <Link to='/' className='logo'>RateVerse</Link>
             <div className='links'>
                 <Link to='/'>Games</Link>
                 <a href="#contacts">Contacts</a>

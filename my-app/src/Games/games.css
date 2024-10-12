@@ -21,7 +21,8 @@
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 #9B3922;
+    -webkit-box-shadow: 0 0 15px #9B3922;
+    box-shadow: 0 0 15px #9B3922;
     transform: scale(1.05);
 }
 
@@ -45,15 +46,20 @@
 }
 
 .card-details h2 {
-    font-size: 24px;
+    font-size: 48px;
     margin-bottom: 10px;
-    color: black;
+    color: #9B3922;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.card-details .genre {
+    color: gray !important;
 }
 
 .card-details p {
     font-size: 16px;
     margin-bottom: 10px;
-    color: gray;
+    color: lightgray;
 }
 
 /* Single Card  */
@@ -104,10 +110,14 @@
     color: black;
 }
 
+.singleCard-details .genre {
+    color: gray !important;
+}
+
 .singleCard-details p {
     font-size: 16px;
     margin-bottom: 10px;
-    color: gray;
+    color: lightgray;
 }
 
 .feedbackBtn {
@@ -117,6 +127,7 @@
 
 .feedbackBtn:hover {
     background-color: #9B3922 !important;
+    color: #222831 !important;
 }
 
 .backBtn {
@@ -149,7 +160,8 @@
 .feedbackContainer textarea ::placeholder {
     color: lightgray !important;
 }
-.rating{
+
+.rating {
     background-color: transparent;
     border-radius: 10px;
     padding: 10px;
@@ -157,8 +169,14 @@
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
-    
+
 }
+
+.feedbackContainer textarea::placeholder {
+    color: gray !important;
+
+}
+
 .submittedFeedbacks {
     margin-bottom: 20px;
     margin-left: 20px;
@@ -166,6 +184,72 @@
     background-color: gray;
     max-width: 90%;
     padding: 20px;
-
     border-radius: 10px;
+}
+
+/* create post */
+.createPost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.createPostContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    background-color: #222831;
+    padding: 20px;
+    border-radius: 10px;
+    color: lightgray;
+    width: 90%;
+    gap: 20px;
+}
+
+.createPostContainer h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.createPostContainer input,
+.createPostContainer textarea {
+    background-color: #222831;
+    border: 1px solid lightgray;
+    color: lightgray;
+    width: 50%;
+    padding: 20px;
+
+}
+
+.createPostContainer input::placeholder,
+.createPostContainer textarea::placeholder {
+    color: lightgray;
+}
+
+.createPostBtn {
+    background-color: gray;
+    color: lightgray;
+}
+
+.createPostBtn:hover {
+    background-color: #9B3922 !important;
+    color: #222831 !important;
+}
+
+.createPost .backBtn {
+    background-color: transparent !important;
+    border: none;
+}
+
+.createPost.backBtn:hover {
+    color: #9B3922 !important;
+}
+
+.createPost .buttons {
+    display: flex;
+    gap: 10px;
 }
