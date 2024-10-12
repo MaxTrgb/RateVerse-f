@@ -72,7 +72,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    box-shadow: 0 8px 16px 0 #9B3922;
+
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -117,7 +117,6 @@
 
 .feedbackBtn:hover {
     background-color: #9B3922 !important;
-
 }
 
 .backBtn {
@@ -126,13 +125,10 @@
 }
 
 .backBtn:hover {
-
     color: #9B3922 !important;
-
 }
 
 .feedbackContainer {
-  
     gap: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -142,7 +138,6 @@
     padding: 10px;
     background-color: #222831;
     width: 90%;
-
 }
 
 .feedbackContainer textarea {
@@ -150,21 +145,27 @@
     border-color: lightgray !important;
     color: gray !important;
 }
+
 .feedbackContainer textarea ::placeholder {
     color: lightgray !important;
+}
+.rating{
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
 }
 .submittedFeedbacks {
     margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
     background-color: gray;
-    max-width: 100%;
+    max-width: 90%;
     padding: 20px;
-    padding-left: 140px;
-    
+
     border-radius: 10px;
-}
-.submittedFeedbacks p {
-    padding: 20px;
-    color: black;
 }

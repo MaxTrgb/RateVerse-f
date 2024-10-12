@@ -21,6 +21,7 @@ const SingleCard = () => {
                     id: data.id,
                     imgSrc: data.image,
                     title: data.title,
+                    genre: data.category,
                     description: data.description,
                     rating: data.rating.rate,
                 });
@@ -73,14 +74,18 @@ const SingleCard = () => {
                     <div>
                         <img src={post.imgSrc} alt={post.title} />
                     </div>
-                    
+
                     <div className="singleCard-details">
-                    <Rate disabled value={post.rating} />
+                        <div className='rating'>
+                            <Rate disabled value={post.rating} />
+                        </div>
+
                         <h1>{post.title}</h1>
+                        <p>{post.genre}</p>
                         <p>{post.description}</p>
 
                     </div>
-                    
+
                 </div>
                 <div className='feedbackContainer'>
                     <h3>Leave Feedback</h3>
@@ -92,23 +97,24 @@ const SingleCard = () => {
                         rows={4}
                         style={{ marginBottom: '10px' }}
                     />
-                    <div>
+                    <div className='rating'>
                         <Rate
                             onChange={setRating}
-                            value={rating}
+                            defaultValue={5}
+                            
                         />
                     </div>
-                    <Button 
-                    type="primary" 
-                    onClick={handleSubmitFeedback} 
-                    className='feedbackBtn'
-                    style={{ marginTop: '10px' }}>
+                    <Button
+                        type="primary"
+                        onClick={handleSubmitFeedback}
+                        className='feedbackBtn'
+                        style={{ marginTop: '10px' }}>
                         Submit Feedback
                     </Button>
                     <Button
                         type="default"
                         className='backBtn'
-                        onClick={() => navigate(-1)} 
+                        onClick={() => navigate(-1)}
                     >
                         Back
                     </Button>
@@ -118,7 +124,7 @@ const SingleCard = () => {
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
                             <div key={index} className='singleFeedback'>
-                                <p><strong>{fb.name}</strong></p>
+                                <p>name</p>
                                 <Rate disabled value={fb.rating} />
                                 <p>{fb.feedback}</p>
                                 <Button
