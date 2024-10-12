@@ -1,11 +1,15 @@
 body {
   margin: 0;
-  background-color: #EEEEEE;
+  background-image: url('./assets/1.jpg') ;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+body .ant-modal-content {
+  padding: 0 !important ; 
+  
 }
 
 code {

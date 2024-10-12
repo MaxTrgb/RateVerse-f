@@ -1,66 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
-
-.myHeader{
-    background-color: #9B3922;
+*{
+    font-family: protest strike;
+}
+.myHeader {
+    background-color: #222831;
     padding: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 7%;
+    padding-right: 7%;
     text-align: center;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.logo{
-    font-size: 34px;
+
+.links{
+    display: flex;
+    gap: 100px;  
+}
+.links a{
+    text-decoration: none;
+    color: lightgray;  
+    font-size: 25px;    
+}
+.links a:hover{
+    color: #9B3922;
+}
+.logo {
+    font-size: 50px;
     font-weight: bold;
     text-decoration: none;
-    color: #222831;
-    font-family: protest strike;
+    color: #9B3922;    
 }
-.myBody{
+
+.myBody {
     padding: 20px;
-  
-    background-color: #EEEEEE;
+   
+    padding-left: 6%;
+    padding-right: 6%;
 }
-.myFooter{
-    background-color:#9B3922;
+
+.myFooter {
+    background-color: #222831;
     padding: 10px;
-    text-align: center;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;   
+    font-size: small;
+}
+.contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.social-icons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    
+}
+.phone, a{
+    font-size: small;    
+    text-decoration: none;
+    
+   
+}
+.backToTopBtn {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-.myFooter button{
-    background-color: #9B3922;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
+    bottom:200px;
+    right: 20px;    
+    border: none; 
     cursor: pointer;
-} 
-.backToTopBtn:hover{
-    color: gray;
+    z-index: 100;
+    background-color: transparent;
 }
-.myTools{
+
+.myTools {
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 20px;
+    
 }
-.sort{
-    display: flex;  
+
+.sort {
+    display: flex;
     justify-content: space-between;
 }
-.sortBtn{
+
+.sortBtn {
     margin-left: 10px;
     margin-right: 10px;
     background-color: #222831;
+    color: lightgray;
 }
-.sortBtn:hover{
+
+.sortBtn:hover {
     background-color: #9B3922 !important;
 }
