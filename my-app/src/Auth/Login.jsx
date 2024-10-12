@@ -1,24 +1,48 @@
-import { Formik, Field, Form, ErrorMessage} from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import styles from './Form.module.css';
 
 const initialValues = {
-    
-    email: '',
-    password: ''
-    
+    name: '',
+    password: '',
 };
+
 const LoginSchema = Yup.object().shape({
-    
-    email: Yup.string().email().required(),
-    password: Yup.string().min(4).max(20).required(),
-    
-})
-const submitHandler = (values, formikBag) => {
-    console.log(values);
+    name: Yup.string().required('Name is required'),
+    password: Yup.string().min(3).max(20).required('Password is required'),
+});
+
+const submitHandler = async (values, formikBag) => {
+    const loginData = {
+        name: values.name,
+        password: values.password,
+    };
+
+    try {
+        const response = await fetch('http://localhost:80/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            console.log('Login successful:', data.message, 'User ID:', data.userId);
+
+        } else {
+            console.error('Login failed:', data.message);
+        }
+    } catch (error) {
+        console.error('Error occurred while logging in:', error);
+    }
+
     formikBag.resetForm();
-}
+};
+
 const Login = ({ toggleForm }) => {
     return (
         <div className={styles.loginForm}>
@@ -28,19 +52,17 @@ const Login = ({ toggleForm }) => {
                 onSubmit={submitHandler}
                 validationSchema={LoginSchema}
             >
-                {({ values }) => (
+                {() => (
                     <Form>
-                        
-
                         <div className={styles.field}>
                             <Field
-                                name="email"
-                                type="email"
-                                placeholder="Email"
+                                name="name"
+                                type="text"
+                                placeholder="Name"
                                 className={styles.input}
                             />
                             <ErrorMessage
-                                name="email"
+                                name="name"
                                 component="div"
                                 className={styles.invalid}
                             />
@@ -77,6 +99,6 @@ const Login = ({ toggleForm }) => {
             </Formik>
         </div>
     );
-}
+};
 
 export default Login;
