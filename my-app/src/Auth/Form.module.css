@@ -82,3 +82,8 @@
     margin: 0;
     padding: 0;
 }
+
+.user-info{
+    background-color: #222831 !important;
+    color: #ffffff !important;
+}

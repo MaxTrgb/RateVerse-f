@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     const authRef = useRef();
+    const isAuthorized = !!localStorage.getItem('userId'); 
 
     const handleRegisterClick = (event) => {
         event.preventDefault();
-        authRef.current.showModal(false); 
+        authRef.current.showModal(false);
     };
 
     return (
@@ -17,7 +18,9 @@ const Header = () => {
             <div className='links'>
                 <Link to='/'>Games</Link>
                 <a href="#contacts">Contacts</a>
-                <a href="/" onClick={handleRegisterClick}>Register</a> 
+                {!isAuthorized && (  
+                    <a href="/" onClick={handleRegisterClick}>Register</a>
+                )}
             </div>
             <Auth ref={authRef} />
         </header>
