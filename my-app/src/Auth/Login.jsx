@@ -2,6 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
 import styles from './Form.module.css';
+import { message } from 'antd';
 
 const initialValues = {
     name: '',
@@ -31,15 +32,15 @@ const submitHandler = async (values, formikBag) => {
         const data = await response.json();
 
         if (data.success) {
-            console.log('Login successful:', data.message, 'User ID:', data.userId);
+            message.success('Login successful!');
             localStorage.setItem('userId', data.userId);
             window.location.reload();
 
         } else {
-            console.error('Login failed:', data.message);
+            message.error('Invalid credentials!');
         }
     } catch (error) {
-        console.error('Error occurred while logging in:', error);
+        message.error('An error occurred. Please try again later.');
     }
 
     formikBag.resetForm();

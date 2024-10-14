@@ -30,7 +30,7 @@ const SingleCard = () => {
                     rating: data.rating,
                 });
             } catch (error) {
-                console.error('Error fetching post:', error);
+                message.error('Error fetching post:', error);
             }
         };
 
@@ -41,7 +41,7 @@ const SingleCard = () => {
                     const data = await response.json();
                     setUserName(data.name);
                 } catch (error) {
-                    console.error('Error fetching user name:', error);
+                    message.error('Error fetching user name:', error);
                 }
             }
         };
@@ -52,7 +52,7 @@ const SingleCard = () => {
                 const data = await response.json();
                 setFeedbacks(data);
             } catch (error) {
-                console.error('Error fetching comments:', error);
+                message.error('Error fetching comments:', error);
             }
         };
 
@@ -128,7 +128,8 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                        <p className='genre'>{post.genre.name}</p>
+                        {/* Add check for post.genre.name */}
+                        <p className='genre'>{post.genre?.name || 'No genre available'}</p>
                         <p>{post.description}</p>
                     </div>
                 </div>
@@ -169,11 +170,11 @@ const SingleCard = () => {
                     <h3>Customer Feedback</h3>
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
-                            <div key={index} className='singleFeedback'>
-                                <p>{fb.user.name}</p>
+                            <div key={index} className='singleFeedback'>                               
+                                <p>{fb.user?.name}</p>
                                 <Rate disabled value={fb.rating} />
                                 <p>{fb.message}</p>
-                                {userId && fb.user.id === parseInt(userId, 10) && (
+                                {userId && fb.user?.id === parseInt(userId, 10) && (
                                     <Button
                                         type="link"
                                         onClick={() => handleDeleteFeedback(index)}

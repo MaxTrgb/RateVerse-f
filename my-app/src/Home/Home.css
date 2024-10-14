@@ -16,7 +16,11 @@
     align-items: center;
 }
 
-
+.myHeader .user-avatar{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
 .links {
     display: flex;
     gap: 100px;
@@ -142,4 +146,10 @@ a {
 
 .sortBtn:hover {
     background-color: #9B3922 !important;
+}
+.user-avatar{
+    object-fit: cover;
+}
+.ant-modal-body form{
+    padding: 20px;
 }
