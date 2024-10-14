@@ -32,6 +32,8 @@ const submitHandler = async (values, formikBag) => {
 
         if (data.success) {
             console.log('Login successful:', data.message, 'User ID:', data.userId);
+            localStorage.setItem('userId', data.userId);
+            window.location.reload();
 
         } else {
             console.error('Login failed:', data.message);

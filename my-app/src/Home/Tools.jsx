@@ -6,11 +6,15 @@ const { Search } = Input;
 
 const Tools = ({ onSortChange, onSearchChange, activeSort }) => {
     const navigate = useNavigate();
+    const isAuthorized = !!localStorage.getItem('userId'); 
+
     return (
         <div className='myTools'>
-            <div className='addPost'>
-                <Button type="primary" onClick={() => navigate('/create-post')}>Add Post</Button>
-            </div>
+            {isAuthorized && (  
+                <div className='addPost'>
+                    <Button type="primary" onClick={() => navigate('/create-post')}>Add Post</Button>
+                </div>
+            )}
             <div className='search'>
                 <Search
                     placeholder="Input search text..."
