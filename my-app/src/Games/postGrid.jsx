@@ -8,9 +8,9 @@ const PostGrid = () => {
     const [posts, setPosts] = useState([]);
     const [sortCriteria, setSortCriteria] = useState(() => {
         const savedSort = localStorage.getItem('activeSort');
-        return savedSort || 'date'; 
+        return savedSort || 'date';
     });
-    const [searchTerm, setSearchTerm] = useState(''); 
+    const [searchTerm, setSearchTerm] = useState('');
 
     const sortPosts = (criteria, posts) => {
         let sortedPosts;
@@ -32,17 +32,17 @@ const PostGrid = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('https://fakestoreapi.com/products');
+                const response = await fetch('/api/v1/post/');
                 const apiPosts = await response.json();
 
                 const mappedPosts = apiPosts.map(post => ({
                     id: post.id,
                     imgSrc: post.image,
                     title: post.title,
-                    genre: post.category,
-                    description: post.description,
-                    rating: post.rating.rate,
-                    date: post.date 
+                    rating: post.rating,
+                    genre: post.genre,
+                    description: post.content,
+                    date: post.createdAt
                 }));
 
                 setPosts(sortPosts(sortCriteria, mappedPosts));
@@ -56,7 +56,7 @@ const PostGrid = () => {
 
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
-        localStorage.setItem('activeSort', criteria); 
+        localStorage.setItem('activeSort', criteria);
     };
 
     const filteredPosts = posts.filter(post =>
@@ -65,26 +65,27 @@ const PostGrid = () => {
 
     return (
         <div>
-            
-            <Tools 
-                onSortChange={handleSortChange} 
-                onSearchChange={setSearchTerm} 
-                activeSort={sortCriteria} 
+
+            <Tools
+                onSortChange={handleSortChange}
+                onSearchChange={setSearchTerm}
+                activeSort={sortCriteria}
             />
             <div className='postGrid'>
-                {filteredPosts.map(post => ( 
+                {filteredPosts.map(post => (
                     <PostItem
                         key={post.id}
                         id={post.id}
                         imgSrc={post.imgSrc}
                         title={post.title}
-                        genre={post.genre}
-                        description={post.description}
                         rating={post.rating}
+                        genre={post.genre.name}
+                        description={post.description}
+
                     />
                 ))}
             </div>
-           
+
         </div>
     );
 }
