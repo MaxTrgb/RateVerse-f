@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Input, Button, message } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Input, Button, message, Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
 import './games.css';
+
+const { Option } = Select;
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -11,30 +13,66 @@ const CreatePost = () => {
     const [genre, setGenre] = useState('');
     const [description, setDescription] = useState('');
     const [imgUrl, setImgUrl] = useState('');
+    const [genres, setGenres] = useState([]); 
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = () => {
+    useEffect(() => {
+        const fetchGenres = async () => {
+            try {
+                const response = await fetch('/api/v1/genre/');
+                const data = await response.json();
+                setGenres(data); 
+            } catch (error) {
+                message.error('Error fetching genres: ' + error.message);
+            }
+        };
+
+        fetchGenres();
+    }, []);
+
+    const handleSubmit = async () => {
         if (!title || !genre || !description || !imgUrl) {
             message.error('Please fill in all fields');
             return;
         }
 
+       
         const newPost = {
+            userId: 1,  
             title,
-            genre,
-            description,
-            imgUrl,
+            image: imgUrl,
+            content: description,
+            genreId: parseInt(genre, 10)  
         };
 
+        setLoading(true); 
 
-        console.log('New Post Created:', newPost);
-        message.success('Post created successfully');
+        try {
+            const response = await fetch('/api/v1/post/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPost)
+            });
 
+            if (!response.ok) {
+                throw new Error('Failed to create post');
+            }
 
-        navigate('/posts');
+            const result = await response.json();
+            console.log('New Post Created:', result);
+            message.success('Post created successfully');
+            navigate('/posts');
+        } catch (error) {
+            message.error('Error creating post: ' + error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <div >
+        <div>
             <Header />
             <div className='createPost'>
                 <div className='createPostContainer'>
@@ -45,12 +83,18 @@ const CreatePost = () => {
                         onChange={(e) => setTitle(e.target.value)}
                         style={{ marginBottom: '10px' }}
                     />
-                    <Input
-                        placeholder="Genre"
+                    <Select
+                        placeholder="Select Genre"
                         value={genre}
-                        onChange={(e) => setGenre(e.target.value)}
-                        style={{ marginBottom: '10px' }}
-                    />
+                        onChange={setGenre}
+                        style={{ width: '50%', marginBottom: '10px' }}
+                    >
+                        {genres.map((g) => (
+                            <Option key={g.id} value={g.id}>
+                                {g.name}
+                            </Option>
+                        ))}
+                    </Select>
                     <Input.TextArea
                         placeholder="Description"
                         value={description}
@@ -70,6 +114,7 @@ const CreatePost = () => {
                             onClick={handleSubmit}
                             style={{ marginRight: '10px' }}
                             className='createPostBtn'
+                            loading={loading}
                         >
                             Submit
                         </Button>
@@ -84,10 +129,9 @@ const CreatePost = () => {
 
                 </div>
             </div>
-
             <Footer />
         </div>
     );
-}
+};
 
 export default CreatePost;

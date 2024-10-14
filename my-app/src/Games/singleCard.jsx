@@ -7,10 +7,14 @@ import Footer from '../Home/Footer';
 const SingleCard = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
     const [feedback, setFeedback] = useState('');
     const [rating, setRating] = useState(0);
     const [feedbacks, setFeedbacks] = useState([]);
+
+
+    const userId = localStorage.getItem('userId');
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -26,48 +30,91 @@ const SingleCard = () => {
                     rating: data.rating,
                 });
             } catch (error) {
-                console.error('Error fetching product:', error);
+                message.error('Error fetching post:', error);
+            }
+        };
+
+        const fetchUserName = async () => {
+            if (userId) {
+                try {
+                    const response = await fetch(`/api/v1/user/${userId}`);
+                    const data = await response.json();
+                    setUserName(data.name);
+                } catch (error) {
+                    message.error('Error fetching user name:', error);
+                }
+            }
+        };
+
+        const fetchComments = async () => {
+            try {
+                const response = await fetch(`/api/v1/comment/?postId=${id}`);
+                const data = await response.json();
+                setFeedbacks(data);
+            } catch (error) {
+                message.error('Error fetching comments:', error);
             }
         };
 
         fetchPost();
-    }, [id]);
-    const handleSubmitFeedback = () => {
+        fetchUserName();
+        fetchComments();
+    }, [id, userId]);
+
+    const handleSubmitFeedback = async () => {
         if (!feedback) {
-            message.error('Please enter your name and feedback');
+            message.error('Please enter your feedback');
             return;
         }
 
-        const newFeedback = { feedback, rating };
-        const updatedFeedbacks = [...feedbacks, newFeedback];
+        const newComment = {
+            userId: parseInt(userId, 10),
+            postId: parseInt(id, 10),
+            rating: rating,
+            message: feedback,
+        };
 
+        try {
+            const response = await fetch('/api/v1/comment/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newComment),
+            });
 
-        setFeedbacks(updatedFeedbacks);
-        localStorage.setItem(`feedbacks_${id}`, JSON.stringify(updatedFeedbacks));
+            if (!response.ok) {
+                throw new Error('Failed to submit feedback');
+            }
 
-        const storedRatings = JSON.parse(localStorage.getItem('ratings')) || {};
-        storedRatings[id] = rating;
-        localStorage.setItem('ratings', JSON.stringify(storedRatings));
-
-
-        setFeedback('');
-        setRating(rating);
-
-        message.success('Feedback submitted successfully');
+            message.success('Feedback submitted successfully');
+            setFeedbacks([...feedbacks, { ...newComment, userName }]);
+            setFeedback('');
+            setRating(0);
+        } catch (error) {
+            message.error(error.message);
+        }
     };
+
     const handleDeleteFeedback = (indexToDelete) => {
+        const feedbackToDelete = feedbacks[indexToDelete];
+
+        if (feedbackToDelete.user.id !== parseInt(userId, 10)) {
+            message.error('You can only delete your own comments.');
+            return;
+        }
+
         const updatedFeedbacks = feedbacks.filter((_, index) => index !== indexToDelete);
         setFeedbacks(updatedFeedbacks);
-        localStorage.setItem(`feedbacks_${id}`, JSON.stringify(updatedFeedbacks));
-
         message.success('Feedback deleted successfully');
-    };
+    }
+
     if (!post) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div >
+        <div>
             <Header />
             <div className='singleCardContainer'>
                 <div className='singleCard'>
@@ -81,58 +128,60 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                        <p className='genre'>{post.genre.name}</p>
+                        {/* Add check for post.genre.name */}
+                        <p className='genre'>{post.genre?.name || 'No genre available'}</p>
                         <p>{post.description}</p>
-
                     </div>
-
                 </div>
-                <div className='feedbackContainer'>
-                    <h3>Leave Feedback</h3>
 
-                    <Input.TextArea
-                        placeholder="Your Feedback"
-                        value={feedback}
-                        onChange={(e) => setFeedback(e.target.value)}
-                        rows={4}
-                        style={{ marginBottom: '10px' }}
-                    />
-                    <div className='rating'>
-                        <Rate
-                            onChange={setRating}
-                            defaultValue={5}
-                            
+                {userId ? (
+                    <div className='feedbackContainer'>
+                        <h3>Leave Feedback</h3>
+
+                        <Input.TextArea
+                            placeholder="Your Feedback"
+                            value={feedback}
+                            onChange={(e) => setFeedback(e.target.value)}
+                            rows={4}
+                            style={{ marginBottom: '10px' }}
                         />
+                        <div className='rating'>
+                            <Rate
+                                onChange={setRating}
+                                defaultValue={5}
+                            />
+                        </div>
+                        <Button
+                            type="primary"
+                            onClick={handleSubmitFeedback}
+                            className='feedbackBtn'
+                            style={{ marginTop: '10px' }}>
+                            Submit Feedback
+                        </Button>
                     </div>
-                    <Button
-                        type="primary"
-                        onClick={handleSubmitFeedback}
-                        className='feedbackBtn'
-                        style={{ marginTop: '10px' }}>
-                        Submit Feedback
-                    </Button>
-                    <Button
-                        type="default"
-                        className='backBtn'
-                        onClick={() => navigate(-1)}
-                    >
-                        Back
-                    </Button>
-                </div>
+                ) : (
+
+                    <div className='feedbackNotice'>
+                        <p>You need to be logged in to leave feedback.</p>
+                    </div>
+                )}
+
                 <div className='submittedFeedbacks' style={{ marginTop: '20px' }}>
                     <h3>Customer Feedback</h3>
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
-                            <div key={index} className='singleFeedback'>
-                                <p>name</p>
+                            <div key={index} className='singleFeedback'>                               
+                                <p>{fb.user?.name}</p>
                                 <Rate disabled value={fb.rating} />
-                                <p>{fb.feedback}</p>
-                                <Button
-                                    type="link"
-                                    onClick={() => handleDeleteFeedback(index)}
-                                    style={{ color: 'red' }}>
-                                    Delete Feedback
-                                </Button>
+                                <p>{fb.message}</p>
+                                {userId && fb.user?.id === parseInt(userId, 10) && (
+                                    <Button
+                                        type="link"
+                                        onClick={() => handleDeleteFeedback(index)}
+                                        style={{ color: 'red' }}>
+                                        Delete Feedback
+                                    </Button>
+                                )}
                                 <hr />
                             </div>
                         ))
@@ -140,8 +189,16 @@ const SingleCard = () => {
                         <p>No feedback yet. Be the first to leave feedback!</p>
                     )}
                 </div>
-            </div>
 
+
+                <Button
+                    type="default"
+                    className='backBtn'
+                    onClick={() => navigate(-1)}
+                >
+                    Back
+                </Button>
+            </div>
 
             <Footer />
         </div>
