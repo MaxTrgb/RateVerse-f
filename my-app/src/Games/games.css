@@ -12,7 +12,7 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: #222831;
+    background-color: rgba(0, 0, 0, 0.9);
     margin-top: 30px;
     margin-bottom: 30px;
     transition: all 0.3s ease-in-out;
@@ -48,7 +48,7 @@
 .card-details h2 {
     font-size: 48px;
     margin-bottom: 10px;
-    color: #9B3922;
+    color: #9B3922 ;
     text-shadow: black 0.1em 0.1em 0.2em;
 }
 
@@ -82,7 +82,7 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: #222831;
+    background-color: rgba(0, 0, 0, 0.9);
     margin-top: 30px;
     margin-bottom: 30px;
     transition: all 0.1s ease-in-out;
@@ -138,7 +138,14 @@
 .backBtn:hover {
     color: #9B3922 !important;
 }
-
+.feedbackNotice{
+    color: lightgray !important;
+    border: gray 1px solid;
+    border-radius: 14px;
+    padding: 20px;
+   
+    background-color: rgba(0, 0, 0, 0.9);
+}
 .feedbackContainer {
     gap: 10px;
     margin-top: 30px;
@@ -147,10 +154,13 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
-    background-color: #222831;
+    background-color: rgba(0, 0, 0, 0.8);
     width: 90%;
 }
-
+.singleCardContainer .singleCard  h1{
+    color: #9B3922 !important;
+    text-shadow: black 0.1em 0.1em 0.2em !important;
+}
 .feedbackContainer textarea {
     background-color: #222831 !important;
     border-color: lightgray !important;
