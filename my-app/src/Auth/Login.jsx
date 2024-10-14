@@ -14,20 +14,20 @@ const LoginSchema = Yup.object().shape({
 });
 
 const submitHandler = async (values, formikBag) => {
+    
     const loginData = {
         name: values.name,
         password: values.password,
     };
 
     try {
-        const response = await fetch('http://localhost:80/auth/login', {
+        const response = await fetch('/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(loginData),
         });
-
         const data = await response.json();
 
         if (data.success) {

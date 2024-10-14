@@ -15,15 +15,15 @@ const SingleCard = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+                const response = await fetch(`/api/v1/post/${id}`);
                 const data = await response.json();
                 setPost({
                     id: data.id,
                     imgSrc: data.image,
                     title: data.title,
-                    genre: data.category,
-                    description: data.description,
-                    rating: data.rating.rate,
+                    genre: data.genre,
+                    description: data.content,
+                    rating: data.rating,
                 });
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -81,7 +81,7 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                        <p className='genre'>{post.genre}</p>
+                        <p className='genre'>{post.genre.name}</p>
                         <p>{post.description}</p>
 
                     </div>

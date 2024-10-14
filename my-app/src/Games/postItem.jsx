@@ -13,9 +13,9 @@ const PostItem = ({ id, imgSrc, title,genre, description, rating }) => {
                     </div>
                     <div className="card-details">
                         <h2>{title}</h2>
-                        <p className="genre">{genre}</p>
-                        <p>{description}</p>
                         <Rate disabled value={rating} />
+                        <p className="genre">{genre}</p>
+                        <p>{description}</p>                        
                     </div>
                 </div>
             </Link>
