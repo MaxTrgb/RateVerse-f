@@ -42,7 +42,10 @@ const PostGrid = () => {
                     rating: post.rating,
                     genre: post.genre,
                     description: post.content,
-                    date: post.createdAt
+                    date: post.createdAt,
+                    user: {
+                        name: post.user.name
+                    }
                 }));
 
                 setPosts(sortPosts(sortCriteria, mappedPosts));
@@ -81,8 +84,10 @@ const PostGrid = () => {
                         rating={post.rating}
                         genre={post.genre.name}
                         description={post.description}
-
+                        userName={post.user.name}
+                        createdAt={post.date}
                     />
+
                 ))}
             </div>
 
