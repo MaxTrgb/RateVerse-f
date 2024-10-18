@@ -17,7 +17,7 @@ const UserPage = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await fetch(`http://localhost:80/api/v1/user/${userId}`);
+                const response = await fetch(`/api/v1/user/${userId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user info');
                 }
@@ -44,7 +44,7 @@ const UserPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:80/api/v1/user/${userId}`, {
+            const response = await fetch(`/api/v1/user/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

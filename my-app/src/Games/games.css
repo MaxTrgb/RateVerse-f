@@ -25,13 +25,15 @@
     box-shadow: 0 0 15px #9B3922;
     transform: scale(1.05);
 }
-
+.postUserName, .postDate{
+    color: gray ;
+}
 
 .card img {
     width: 450px;
     height: 450px;
-    max-width: fit-content;
-    object-fit: fill;
+    
+    object-fit:contain;
     border-radius: 10px;
     padding: 20px;
 }
@@ -48,7 +50,7 @@
 .card-details h2 {
     font-size: 48px;
     margin-bottom: 10px;
-    color: #9B3922 ;
+    color: #9B3922;
     text-shadow: black 0.1em 0.1em 0.2em;
 }
 
@@ -60,8 +62,18 @@
     font-size: 16px;
     margin-bottom: 10px;
     color: lightgray;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    max-height: 60px;
 }
-
+.postAuthor{
+    display: flex;
+    flex-direction: row;
+}
 /* Single Card  */
 
 .singleCardContainer {
@@ -89,10 +101,8 @@
 }
 
 .singleCard img {
-    width: 500px;
-    height: 500px;
-    object-fit: fill;
-    max-width: fit-content;
+    max-height: 500px;
+    
     border-radius: 10px;
 }
 

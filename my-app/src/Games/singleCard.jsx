@@ -91,6 +91,8 @@ const SingleCard = () => {
             setFeedbacks([...feedbacks, { ...newComment, userName }]);
             setFeedback('');
             setRating(0);
+            window.location.reload();
+            
         } catch (error) {
             message.error(error.message);
         }
@@ -117,6 +119,7 @@ const SingleCard = () => {
         <div>
             <Header />
             <div className='singleCardContainer'>
+               
                 <div className='singleCard'>
                     <div>
                         <img src={post.imgSrc} alt={post.title} />
@@ -128,7 +131,7 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                        {/* Add check for post.genre.name */}
+                       
                         <p className='genre'>{post.genre?.name || 'No genre available'}</p>
                         <p>{post.description}</p>
                     </div>
