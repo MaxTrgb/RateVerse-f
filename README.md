@@ -24,7 +24,7 @@ Backend:
 
 C# (.NET Core) for the server-side application
 Nancy framework for implementing REST APIs
-MongoDB (for database storage)
+MySql (for database storage)
 
 Infrastructure:
 
