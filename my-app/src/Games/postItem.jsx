@@ -1,9 +1,9 @@
-import React from 'react'; 
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './games.css';
 import { Rate } from 'antd';
 
-const PostItem = ({ id, imgSrc, title, genre, description, rating, user, createdAt }) => {
+const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt }) => {
     return (
         <div>
             <Link style={{ textDecoration: 'none' }} to={`http://34.116.253.154/post/${id}`}>
@@ -12,7 +12,7 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, user, created
                         <div>
                             <div className='postAuthor'>
                                 <p className='postUserName'>
-                                    <b>{user.name}</b> 
+                                    <b>{authorName}</b>
                                 </p>
                                 <p className='postDate'>
                                     {new Date(createdAt).toLocaleDateString('en-US', {

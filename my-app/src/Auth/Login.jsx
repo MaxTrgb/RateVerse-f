@@ -22,7 +22,7 @@ const submitHandler = async (values, formikBag) => {
     };
 
     try {
-        const response = await fetch('http://34.116.253.154/auth/login', {
+        const response = await fetch('/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
