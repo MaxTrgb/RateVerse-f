@@ -5,6 +5,7 @@ import PostGrid from './Games/postGrid';
 import SingleCard from './Games/singleCard';
 import CreatePost from './Games/createPost';
 import UserPage from './Home/UserPage';
+import EditPost from './Games/editPost';
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/posts" element={<PostGrid />} />
                 <Route path="/post/:id" element={<SingleCard />} />
                 <Route path="/create-post" element={<CreatePost />} />
+                <Route path="/edit-post/:id" element={<EditPost />} />
                 <Route path="/user" element={<UserPage />} />
             </Routes>
         </Router>

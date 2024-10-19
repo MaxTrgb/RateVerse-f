@@ -130,7 +130,24 @@
     margin-bottom: 10px;
     color: lightgray;
 }
-
+.postActions{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.postActions button{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: lightgray;
+    background-color: #222831;
+    font-weight: 600;
+}
+.postActions button:hover{
+    background-color: #9B3922 !important;
+    color: #222831 !important;
+}
 .feedbackBtn {
     background-color: gray;
     color: lightgray;
@@ -201,11 +218,17 @@
 .submittedFeedbacks {
     margin-bottom: 20px;
     margin-left: 20px;
-    margin-right: 20px;
-    background-color: rgba(0, 0, 0, 0.9);
+    margin-right: 20px;   
     width: 90%;
     padding: 20px;
     border-radius: 10px;
+}
+.singleFeedback{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+   
 }
 .singleFeedback P{
     color: gray !important;
@@ -299,4 +322,71 @@
 .deleteBtn:hover {
     background-color: #9B3922 !important;
     color: #222831 !important;
+}
+/* edit post */
+
+.editPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9); 
+    color: lightgray; 
+    border-radius: 10px;
+    margin: 20px; 
+    
+}
+
+.editPostForm {
+    display: flex;
+    flex-direction: column;
+    width: 50%; 
+    gap: 20px;
+}
+
+.editPostForm h1 {
+    color: white; 
+    margin-bottom: 20px;
+}
+
+.editPostForm .ant-input,
+.editPostForm .ant-input-text-area {
+    background-color: #222831; 
+    border: 1px solid lightgray; 
+    color: lightgray;
+    padding: 10px; 
+}
+
+.editPostForm .ant-input::placeholder,
+.editPostForm .ant-input-text-area::placeholder {
+    color: lightgray; 
+}
+
+.editPostForm .ant-btn {
+    background-color: gray; 
+    color: lightgray; 
+    border-radius: 10px; 
+}
+
+.editPostForm .ant-btn:hover {
+    background-color: #9B3922 !important;
+    color: #222831 !important;
+}
+
+.backBtn {
+    background-color: transparent !important; 
+    border: none; 
+    color: gray !important;
+}
+
+.backBtn:hover {
+    color: #9B3922 !important; 
+}
+
+
+.loading {
+    color: lightgray;
+    font-size: 16px;
+    text-align: center; 
 }
