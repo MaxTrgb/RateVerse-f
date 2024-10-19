@@ -19,7 +19,7 @@ const SingleCard = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`/api/v1/post/${id}`);
+                const response = await fetch(`http://34.116.253.154/api/v1/post/${id}`);
                 const data = await response.json();
                 setPost({
                     id: data.id,
@@ -37,7 +37,7 @@ const SingleCard = () => {
         const fetchUserName = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`/api/v1/user/${userId}`);
+                    const response = await fetch(`http://34.116.253.154/api/v1/user/${userId}`);
                     const data = await response.json();
                     setUserName(data.name);
                 } catch (error) {
@@ -48,7 +48,7 @@ const SingleCard = () => {
 
         const fetchComments = async () => {
             try {
-                const response = await fetch(`/api/v1/comment/?postId=${id}`);
+                const response = await fetch(`http://34.116.253.154/api/v1/comment/?postId=${id}`);
                 const data = await response.json();
                 setFeedbacks(data);
             } catch (error) {
@@ -75,7 +75,7 @@ const SingleCard = () => {
         };
 
         try {
-            const response = await fetch('/api/v1/comment/', {
+            const response = await fetch('http://34.116.253.154/api/v1/comment/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const SingleCard = () => {
             setFeedback('');
             setRating(0);
             window.location.reload();
-            
+
         } catch (error) {
             message.error(error.message);
         }
@@ -119,7 +119,7 @@ const SingleCard = () => {
         <div>
             <Header />
             <div className='singleCardContainer'>
-               
+
                 <div className='singleCard'>
                     <div>
                         <img src={post.imgSrc} alt={post.title} />
@@ -131,7 +131,7 @@ const SingleCard = () => {
                         </div>
 
                         <h1>{post.title}</h1>
-                       
+
                         <p className='genre'>{post.genre?.name || 'No genre available'}</p>
                         <p>{post.description}</p>
                     </div>
@@ -173,10 +173,10 @@ const SingleCard = () => {
                     <h3>Customer Feedback</h3>
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
-                            <div key={index} className='singleFeedback'>                               
+                            <div key={index} className='singleFeedback'>
                                 <p>{fb.user?.name}</p>
                                 <Rate disabled value={fb.rating} />
-                                <p>{fb.message}</p>
+                                <h2>{fb.message}</h2>
                                 {userId && fb.user?.id === parseInt(userId, 10) && (
                                     <Button
                                         type="link"

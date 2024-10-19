@@ -6,7 +6,7 @@ import { Rate } from 'antd';
 const PostItem = ({ id, imgSrc, title, genre, description, rating, userName, createdAt }) => {
     return (
         <div>
-            <Link style={{ textDecoration: 'none' }} to={`/post/${id}`}>
+            <Link style={{ textDecoration: 'none' }} to={`http://34.116.253.154/post/${id}`}>
 
                 <div className="card">
 

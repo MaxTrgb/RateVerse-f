@@ -13,7 +13,7 @@ const Header = () => {
             const userId = localStorage.getItem('userId');
             if (userId) {
                 try {
-                    const response = await fetch(`http://localhost:80/api/v1/user/${userId}`);
+                    const response = await fetch(`http://34.116.253.154/api/v1/user/${userId}`);
                     if (!response.ok) {
                         throw new Error('Failed to fetch user info');
                     }

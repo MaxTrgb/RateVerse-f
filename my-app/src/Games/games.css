@@ -27,6 +27,7 @@
 }
 .postUserName, .postDate{
     color: gray ;
+    padding: 10px;
 }
 
 .card img {
@@ -201,12 +202,18 @@
     margin-bottom: 20px;
     margin-left: 20px;
     margin-right: 20px;
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.9);
     width: 90%;
     padding: 20px;
     border-radius: 10px;
 }
-
+.singleFeedback P{
+    color: gray !important;
+}
+.singleFeedback h2{
+    color: lightgray !important;
+    font-weight: 100;
+}
 /* create post */
 .createPost {
     display: flex;
@@ -272,4 +279,24 @@
 .createPost .buttons {
     display: flex;
     gap: 10px;
+}
+.editBtn {
+    background-color: gray;
+    color: lightgray;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.editBtn:hover {
+    background-color: #9B3922 !important;
+    color: #222831 !important;
+}
+.deleteBtn {
+    background-color: gray;
+    color: lightgray;
+}
+
+.deleteBtn:hover {
+    background-color: #9B3922 !important;
+    color: #222831 !important;
 }
