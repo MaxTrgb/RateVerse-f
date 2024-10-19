@@ -13,15 +13,16 @@ const CreatePost = () => {
     const [genre, setGenre] = useState('');
     const [description, setDescription] = useState('');
     const [imgUrl, setImgUrl] = useState('');
-    const [genres, setGenres] = useState([]); 
+    const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchGenres = async () => {
             try {
-                const response = await fetch('/api/v1/genre/');
+                const response = await fetch('http://34.116.253.154/api/v1/genre/');
                 const data = await response.json();
-                setGenres(data); 
+                setGenres(data);
             } catch (error) {
                 message.error('Error fetching genres: ' + error.message);
             }
@@ -36,16 +37,17 @@ const CreatePost = () => {
             return;
         }
 
-       
+        const userId = localStorage.getItem('userId');
+
         const newPost = {
-            userId: 1,  
+            userId: parseInt(userId, 10),
             title,
             image: imgUrl,
             content: description,
-            genreId: parseInt(genre, 10)  
+            genreId: parseInt(genre, 10)
         };
 
-        setLoading(true); 
+        setLoading(true);
 
         try {
             const response = await fetch('http://34.116.253.154/api/v1/post/', {
@@ -61,9 +63,17 @@ const CreatePost = () => {
             }
 
             const result = await response.json();
-            console.log('New Post Created:', result);
-            message.success('Post created successfully');
-            navigate('/posts');
+            if (result && result.id) {
+                console.log('New Post Created:', result);
+                message.success('Post created successfully');
+                navigate(`/post/${result.id}`);
+            } else {
+                message.error('Error: Post creation succeeded, but no post ID was returned.');
+            }
+
+
+
+
         } catch (error) {
             message.error('Error creating post: ' + error.message);
         } finally {
@@ -126,7 +136,6 @@ const CreatePost = () => {
                             Back
                         </Button>
                     </div>
-
                 </div>
             </div>
             <Footer />
