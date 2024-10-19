@@ -21,7 +21,11 @@ const PostGrid = () => {
             sortedPosts = [...posts].sort((a, b) => b.rating - a.rating);
         }
         if (criteria === 'genre') {
-            sortedPosts = [...posts].sort((a, b) => a.genre.localeCompare(b.genre));
+            sortedPosts = [...posts].sort((a, b) => {
+                const genreA = typeof a.genre === 'string' ? a.genre : a.genre.name;
+                const genreB = typeof b.genre === 'string' ? b.genre : b.genre.name;
+                return genreA.localeCompare(genreB);
+            });
         }
         if (criteria === 'date') {
             sortedPosts = [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));

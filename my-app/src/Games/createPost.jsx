@@ -63,17 +63,11 @@ const CreatePost = () => {
             }
 
             const result = await response.json();
-            if (result && result.id) {
-                console.log('New Post Created:', result);
+            if (result) {
+               
                 message.success('Post created successfully');
-                navigate(`/post/${result.id}`);
-            } else {
-                message.error('Error: Post creation succeeded, but no post ID was returned.');
+                navigate(`/`);
             }
-
-
-
-
         } catch (error) {
             message.error('Error creating post: ' + error.message);
         } finally {

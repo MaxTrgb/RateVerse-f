@@ -13,7 +13,6 @@ const SingleCard = () => {
     const [rating, setRating] = useState(0);
     const [feedbacks, setFeedbacks] = useState([]);
 
-
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
@@ -21,14 +20,7 @@ const SingleCard = () => {
             try {
                 const response = await fetch(`/api/v1/post/${id}`);
                 const data = await response.json();
-                setPost({
-                    id: data.id,
-                    imgSrc: data.image,
-                    title: data.title,
-                    genre: data.genre,
-                    description: data.content,
-                    rating: data.rating,
-                });
+                setPost(data);
             } catch (error) {
                 message.error('Error fetching post:', error);
             }
@@ -111,6 +103,31 @@ const SingleCard = () => {
         message.success('Feedback deleted successfully');
     }
 
+    const handleEditPost = () => {
+       
+        navigate(`/edit-post/${post.id}`);
+    };
+
+    const handleDeletePost = async () => {
+        const userId = localStorage.getItem('userId'); 
+        try {
+            const response = await fetch(`/api/v1/post/${post.id}?userId=${userId}`, {
+                method: 'DELETE',
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json(); 
+                throw new Error(`Failed to delete post: ${errorData.message || 'Unknown error'}`);
+            }
+    
+            message.success('Post deleted successfully');
+            navigate('/'); 
+        } catch (error) {
+            message.error(error.message);
+        }
+    };
+    
+
     if (!post) {
         return <div>Loading...</div>;
     }
@@ -119,10 +136,21 @@ const SingleCard = () => {
         <div>
             <Header />
             <div className='singleCardContainer'>
-
                 <div className='singleCard'>
+                    <div className='postAuthor'>
+                        <p className='postUserName'>
+                            <b>{post.user.name}</b>
+                        </p>
+                        <p className='postDate'>
+                            {new Date(post.createdAt).toLocaleDateString('en-US', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                            })} 
+                        </p>
+                    </div>
                     <div>
-                        <img src={post.imgSrc} alt={post.title} />
+                        <img src={post.image} alt={post.title} />
                     </div>
 
                     <div className="singleCard-details">
@@ -133,7 +161,18 @@ const SingleCard = () => {
                         <h1>{post.title}</h1>
 
                         <p className='genre'>{post.genre?.name || 'No genre available'}</p>
-                        <p>{post.description}</p>
+                        <p>{post.content}</p>
+
+                        {userId && post.user.id === parseInt(userId, 10) && (
+                            <div className='postActions'>
+                                <Button type="primary" onClick={handleEditPost} style={{ marginRight: '10px' }}>
+                                    Edit
+                                </Button>
+                                <Button type="danger" onClick={handleDeletePost}>
+                                    Delete
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -158,12 +197,11 @@ const SingleCard = () => {
                             type="primary"
                             onClick={handleSubmitFeedback}
                             className='feedbackBtn'
-                            style={{ marginTop: '10px' }}>
+                            style={{ marginTop: '10px' }} >
                             Submit Feedback
                         </Button>
                     </div>
                 ) : (
-
                     <div className='feedbackNotice'>
                         <p>You need to be logged in to leave feedback.</p>
                     </div>
@@ -185,14 +223,13 @@ const SingleCard = () => {
                                         Delete Feedback
                                     </Button>
                                 )}
-                                <hr />
+                               
                             </div>
                         ))
                     ) : (
                         <p>No feedback yet. Be the first to leave feedback!</p>
                     )}
                 </div>
-
 
                 <Button
                     type="default"
