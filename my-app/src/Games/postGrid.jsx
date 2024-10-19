@@ -86,6 +86,7 @@ const PostGrid = () => {
                         description={post.description}
                         userName={post.user.name}
                         createdAt={post.date}
+                        authorName={post.user.name}
                     />
 
                 ))}
