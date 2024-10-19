@@ -36,9 +36,9 @@ const CreatePost = () => {
             message.error('Please fill in all fields');
             return;
         }
-
+    
         const userId = localStorage.getItem('userId');
-
+    
         const newPost = {
             userId: parseInt(userId, 10),
             title,
@@ -46,9 +46,9 @@ const CreatePost = () => {
             content: description,
             genreId: parseInt(genre, 10)
         };
-
+    
         setLoading(true);
-
+    
         try {
             const response = await fetch('/api/v1/post/', {
                 method: 'POST',
@@ -57,16 +57,15 @@ const CreatePost = () => {
                 },
                 body: JSON.stringify(newPost)
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to create post');
             }
-
+    
             const result = await response.json();
-            if (result) {
-               
+            if (result) { 
                 message.success('Post created successfully');
-                navigate(`/`);
+                navigate(`/`); 
             }
         } catch (error) {
             message.error('Error creating post: ' + error.message);
@@ -74,6 +73,7 @@ const CreatePost = () => {
             setLoading(false);
         }
     };
+    
 
     return (
         <div>
