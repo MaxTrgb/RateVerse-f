@@ -32,7 +32,7 @@ const PostGrid = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('http://34.116.253.154/api/v1/post/');
+                const response = await fetch('/api/v1/post/');
                 const apiPosts = await response.json();
 
                 const mappedPosts = apiPosts.map(post => ({
