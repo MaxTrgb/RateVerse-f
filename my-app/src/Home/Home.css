@@ -22,7 +22,7 @@
     height: 30px;
 }
 .links {
-    display: flex;
+    display: flex;  
     gap: 100px;
 }
 

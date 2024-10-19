@@ -48,7 +48,7 @@ const CreatePost = () => {
         setLoading(true); 
 
         try {
-            const response = await fetch('/api/v1/post/', {
+            const response = await fetch('http://34.116.253.154/api/v1/post/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

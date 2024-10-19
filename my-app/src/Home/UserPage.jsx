@@ -17,7 +17,7 @@ const UserPage = () => {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await fetch(`/api/v1/user/${userId}`);
+                const response = await fetch(`http://34.116.253.154/api/v1/user/${userId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user info');
                 }
@@ -44,7 +44,7 @@ const UserPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`/api/v1/user/${userId}`, {
+            const response = await fetch(`http://34.116.253.154/api/v1/user/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,8 +54,8 @@ const UserPage = () => {
             if (!response.ok) {
                 throw new Error('Failed to update user info');
             }
-           
-        
+
+
         } catch (error) {
             message.error('Failed to update user info');
         }
@@ -75,9 +75,11 @@ const UserPage = () => {
                     <div className="user-info">
                         <img
                             src={userInfo.image}
-                            alt="User image"
+                            alt={`${userInfo.name}'s avatar`}
                             className="ava"
                         />
+
+
                         <form onSubmit={handleSubmit} className="user-form">
                             <div className="form-group">
                                 <label htmlFor="name">Name:</label>
@@ -106,7 +108,7 @@ const UserPage = () => {
                         <button onClick={handleLogout} className="logout-button">Logout</button>
                     </div>
 
-                    
+
                 </main>
             </div>
             <Footer />
