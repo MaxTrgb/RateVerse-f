@@ -150,7 +150,7 @@
 }
 .feedbackBtn {
     background-color: gray;
-    color: lightgray;
+    color: #222831
 }
 
 .feedbackBtn:hover {
@@ -223,6 +223,13 @@
     padding: 20px;
     border-radius: 10px;
 }
+.submittedFeedbacks h3{
+    color: #9B3922 !important;
+    text-shadow: black 0.1em 0.1em 0.2em !important;
+}
+.submittedFeedbacks p{
+    color: lightgray !important;
+}
 .singleFeedback{
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
@@ -244,6 +251,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    height:  100vh;
 }
 
 .createPostContainer {
@@ -252,7 +260,7 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-    background-color: #222831;
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 20px;
     border-radius: 10px;
     color: lightgray;
@@ -278,8 +286,15 @@
 .createPostContainer input::placeholder,
 .createPostContainer textarea::placeholder {
     color: lightgray;
+    
 }
-
+.createPostContainer .ant-input,
+.createPostContainer .ant-input-text-area {
+    background-color: #222831; 
+    border: 1px solid lightgray; 
+    color: lightgray;
+    padding: 10px; 
+}
 .createPostBtn {
     background-color: gray;
     color: lightgray;

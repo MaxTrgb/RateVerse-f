@@ -104,29 +104,29 @@ const SingleCard = () => {
     }
 
     const handleEditPost = () => {
-       
+
         navigate(`/edit-post/${post.id}`);
     };
 
     const handleDeletePost = async () => {
-        const userId = localStorage.getItem('userId'); 
+
         try {
-            const response = await fetch(`/api/v1/post/${post.id}?userId=${userId}`, {
+            const response = await fetch(`/api/v1/post/${post.id}?userId=${post.user.id}`, {
                 method: 'DELETE',
             });
-    
-            if (!response.ok) {
-                const errorData = await response.json(); 
+
+            if (response.ok) {
+                const errorData = await response.json();
                 throw new Error(`Failed to delete post: ${errorData.message || 'Unknown error'}`);
             }
-    
+
             message.success('Post deleted successfully');
-            navigate('/'); 
+            navigate('/');
         } catch (error) {
             message.error(error.message);
         }
     };
-    
+
 
     if (!post) {
         return <div>Loading...</div>;
@@ -146,7 +146,7 @@ const SingleCard = () => {
                                 day: 'numeric',
                                 month: 'long',
                                 year: 'numeric',
-                            })} 
+                            })}
                         </p>
                     </div>
                     <div>
@@ -223,7 +223,7 @@ const SingleCard = () => {
                                         Delete Feedback
                                     </Button>
                                 )}
-                               
+
                             </div>
                         ))
                     ) : (
