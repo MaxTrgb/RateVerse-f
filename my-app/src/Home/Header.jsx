@@ -33,18 +33,23 @@ const Header = () => {
         authRef.current.showModal(false);
     };
 
+    const handleRandomPostClick = () => {
+        
+        const totalPosts = 10; 
+        const randomId = Math.floor(Math.random() * totalPosts) + 1; 
+        return `/post/${randomId}`; 
+    };
+
     return (
         <header className='myHeader'>
             <Link to='/' className='logo'>RateVerse</Link>
             <div className='links'>
-                <Link to='/'>Movies</Link>
-                <Link to='/'>TV Shows</Link>
+                <Link to={handleRandomPostClick()} onClick={handleRandomPostClick}>Feeling Lucky</Link>
                 <Link to='/'>Games</Link>
                 <a href="#contacts">Contacts</a>
                 {!isAuthorized && (
                     <a href="/" onClick={handleRegisterClick}>Register</a>
                 )}
-
             </div>
             <div>
                 {isAuthorized && userInfo && (
