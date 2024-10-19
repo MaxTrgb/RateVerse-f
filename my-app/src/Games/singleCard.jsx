@@ -19,7 +19,7 @@ const SingleCard = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`http://34.116.253.154/api/v1/post/${id}`);
+                const response = await fetch(`/api/v1/post/${id}`);
                 const data = await response.json();
                 setPost({
                     id: data.id,
@@ -37,7 +37,7 @@ const SingleCard = () => {
         const fetchUserName = async () => {
             if (userId) {
                 try {
-                    const response = await fetch(`http://34.116.253.154/api/v1/user/${userId}`);
+                    const response = await fetch(`/api/v1/user/${userId}`);
                     const data = await response.json();
                     setUserName(data.name);
                 } catch (error) {
@@ -48,7 +48,7 @@ const SingleCard = () => {
 
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://34.116.253.154/api/v1/comment/?postId=${id}`);
+                const response = await fetch(`/api/v1/comment/?postId=${id}`);
                 const data = await response.json();
                 setFeedbacks(data);
             } catch (error) {
@@ -75,7 +75,7 @@ const SingleCard = () => {
         };
 
         try {
-            const response = await fetch('http://34.116.253.154/api/v1/comment/', {
+            const response = await fetch('/api/v1/comment/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

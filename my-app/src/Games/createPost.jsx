@@ -20,7 +20,7 @@ const CreatePost = () => {
     useEffect(() => {
         const fetchGenres = async () => {
             try {
-                const response = await fetch('http://34.116.253.154/api/v1/genre/');
+                const response = await fetch('/api/v1/genre/');
                 const data = await response.json();
                 setGenres(data);
             } catch (error) {
@@ -50,7 +50,7 @@ const CreatePost = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://34.116.253.154/api/v1/post/', {
+            const response = await fetch('/api/v1/post/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
