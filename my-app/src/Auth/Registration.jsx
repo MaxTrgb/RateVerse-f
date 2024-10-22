@@ -23,9 +23,10 @@ const submitHandler = async (values, formikBag) => {
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (data.success) {
             console.log("Registration successful:", data);
-            formikBag.resetForm();
+            localStorage.setItem('userId', data.userId);
+            window.location.reload();
         } else {
             console.error("Registration failed:", data.message);
             alert(`Registration failed: ${data.message}`);
