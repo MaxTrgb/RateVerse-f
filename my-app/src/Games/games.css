@@ -373,6 +373,26 @@
     margin-top: 20px;
     border: 1px solid gray;
 }
+.rateBtn{
+    margin-bottom: 20px;
+    padding: 50px;
+    border: #9B3922 1px solid;
+    -webkit-box-shadow: 0 0 10px #222831;
+        box-shadow: 0 0 15px #222831;
+    border-radius: 20px;
+    background-color: #222831;
+    transition-duration: 0.3s;    
+}
+.alreadyRated{
+    margin-bottom: 20px;
+    padding: 50px;
+    text-shadow: #222831 0.1em 0.1em 0.2em;
+    color: gray;
+}
+.rateBtn:hover{
+    background-color: #9B3927;
+   
+}
 /* create post */
 .createPost {
     display: flex;
@@ -541,13 +561,18 @@
 }
 
 .postTitle {
-    background-color: rgba(0, 0, 0, 0.9);  
-    margin: 0; 
-    display: flex;
-    justify-content: center;
-    padding-bottom: 30px;
+    color: lightgray;
+    font-size: 50px;
     text-align: center;
-    color: #9B3922;
-    text-shadow: black 0.1em 0.1em 0.2em;
-    font-size: 38px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-shadow: #222831 0.1em 0.1em 0.2em;
+}
+.postTitleContainer{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #9B3922;
 }

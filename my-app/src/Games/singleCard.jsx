@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Rate, Input, Button, message } from 'antd';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
-import { Circles } from 'react-loader-spinner'
+import { Circles } from 'react-loader-spinner';
 
 const SingleCard = () => {
     const { id } = useParams();
@@ -137,14 +137,13 @@ const SingleCard = () => {
                 <Circles
                 height="500"
                 width="500"
-                color="#de7f69"
+                color="#9B3922"
                 ariaLabel="circles-loading"
                 wrapperStyle={{}}
                 wrapperClass=""
                 visible={true}
                 />
-            </div>
-        // return <div>Loading...</div>;
+            </div>       
     }
 
     return (
@@ -335,11 +334,20 @@ const RatingSection = ({ postId, userId, fetchPost }) => {
 
     return (
         <div className='ratingSection'>
+            <h3>Rate this game!</h3>
             <Rate  
-                value={existingRating || rate}
+                value={existingRating || 5}
                 onChange={handleRatingChange}
                 disabled={existingRating != null || rate != -1}
+                className='rateBtn'
             />
+
+            {existingRating && (
+                <p className='alreadyRated'>
+                    You have rated this game.
+                </p>
+            )}
+            
         </div>
     );
 };
