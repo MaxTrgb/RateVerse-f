@@ -10,21 +10,10 @@ const SingleCard = () => {
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
     const [feedback, setFeedback] = useState('');
-    const [rating, setRating] = useState(0);
     const [feedbacks, setFeedbacks] = useState([]);
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-       
-        const fetchPost = async () => {
-            try {
-                const response = await fetch(`/api/v1/post/${id}`);
-                const data = await response.json();
-                setPost(data);
-            } catch (error) {
-                message.error('Error fetching post:', error);
-            }
-        };
 
         const fetchUserName = async () => {
             if (userId) {
@@ -52,6 +41,16 @@ const SingleCard = () => {
         fetchUserName();
         fetchComments(); 
     }, [id, userId]);
+
+    const fetchPost = async () => {
+        try {
+            const response = await fetch(`/api/v1/post/${id}`);
+            const data = await response.json();
+            setPost(data);
+        } catch (error) {
+            message.error('Error fetching post:', error);
+        }
+    };
 
     const fetchComments = async () => {
         try {
@@ -183,7 +182,7 @@ const SingleCard = () => {
                     </div>
                 </div>
 
-                <RatingSection rating={rating} setRating={setRating} postId={post.id} userId={userId} />
+                <RatingSection postId={post.id} userId={userId} fetchPost={fetchPost}/>
 
                 {userId ? (
                     <div className='feedbackContainer'>
@@ -249,14 +248,24 @@ const SingleCard = () => {
     );
 };
 
-const RatingSection = ({ rating, setRating, postId, userId }) => {
+const RatingSection = ({ postId, userId, fetchPost }) => {
     const [existingRating, setExistingRating] = useState(null);
-
+    const [rate, setRate] = useState(-1);
+    
     useEffect(() => {
         const fetchUserRating = async () => {
             if (userId) {
                 try {
                     const response = await fetch(`/api/v1/post/rate/${postId}?userId=${userId}`);
+                    
+                    if (response.status === 404) {
+                        return;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user rating');
+                    }
+                    
                     const data = await response.json();
 
                     if (data && data.postRate !== undefined) {
@@ -271,14 +280,14 @@ const RatingSection = ({ rating, setRating, postId, userId }) => {
         fetchUserRating();
     }, [postId, userId]);
 
-    const handleRatingSubmit = async () => {
+    const handleRatingSubmit = async (newRating) => {
         if (!userId) {
             message.error('You need to be logged in to submit a rating.');
             return;
         }
 
         try {
-            const response = await fetch(`/api/v1/post/rate/${postId}?userId=${userId}&rating=${rating}`, {
+            const response = await fetch(`/api/v1/post/rate/${postId}?userId=${userId}&rating=${newRating}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -290,17 +299,23 @@ const RatingSection = ({ rating, setRating, postId, userId }) => {
             }
 
             message.success('Rating submitted successfully');
+            await fetchPost();
         } catch (error) {
             message.error(error.message);
         }
     };
 
+    const handleRatingChange = (value) => {
+        setRate(value);
+        handleRatingSubmit(value);
+    };
+
     return (
         <div className='ratingSection'>
-            <Rate
-                value={existingRating || rating}
-                onChange={setRating}
-                onClick={handleRatingSubmit}
+            <Rate  
+                value={existingRating || rate}
+                onChange={handleRatingChange}
+                disabled={existingRating != null || rate != -1}
             />
         </div>
     );
