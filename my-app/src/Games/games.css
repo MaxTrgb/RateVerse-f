@@ -19,7 +19,32 @@
     padding-left: 0;
     padding-right: 0;
 }
+.postDate {
+    font-size: 12px !important; 
+}
 
+.postUserName {
+    font-size: 16px !important; 
+}
+
+.postAuthorLink{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    justify-content: center;    
+    border-radius: 10px;
+    padding: 0%;
+}
+.postAuthorLink .postAuthorPic{
+    padding: 5px;
+}
+.postAuthorLink .postUserName{
+    padding: 5px;
+}
+.postAuthorLink:hover{
+    background-color: #222831 !important;
+}
 .card:hover {
     -webkit-box-shadow: 0 0 15px #9B3922;
     box-shadow: 0 0 15px #9B3922;
@@ -31,11 +56,20 @@
     color: gray;
     padding: 10px;
 }
-
+.postAuthor{
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+}
+.postAuthor .postAuthorPic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;   
+}
 .card img {
     width: 450px;
     height: 450px;
-
     object-fit: contain;
     border-radius: 10px;
     padding: 20px;
@@ -77,12 +111,13 @@
 .postAuthor {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 /* Single Card  */
 
 .singleCardContainer {
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,7 +130,6 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -309,7 +343,36 @@
     font-size: 1.5rem;
     color: gray;
 }
-
+.feedbackAuthor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: fit-content;
+    padding: 5px;
+    margin: 0%;    
+    border-radius: 10px;  
+}
+.feedbackAuthor:hover{
+    cursor: pointer;
+    background-color: #222831;
+}
+.feedbackAuthor .feedbackAuthorPic {        
+    padding: 0%;
+    margin: 0%;
+}
+.feedbackAuthor .feedbackAuthorName {
+    padding: 10px;
+    margin: 0%;
+}
+.feedbackAuthorPic{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid gray;
+}
 /* create post */
 .createPost {
     display: flex;
