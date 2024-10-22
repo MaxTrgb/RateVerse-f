@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './games.css';
 import { Rate } from 'antd';
 
-const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt }) => {
+const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt, authorId }) => {
     const [authorImg, setAuthorImg] = useState('');
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                     <div>
                         <div>
                             <div className='postAuthor'>
-                                <Link className='postAuthorLink'to={`/user/${authorName}`}>
+                                <Link className='postAuthorLink'to={`/user/${authorId}`}>
                                     <img src={authorImg} alt="" className='postAuthorPic' />
                                     <p className='postUserName'>
                                         <b>{authorName}</b>
