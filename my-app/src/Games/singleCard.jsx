@@ -12,6 +12,7 @@ const SingleCard = () => {
     const [feedback, setFeedback] = useState('');
     const [feedbacks, setFeedbacks] = useState([]);
     const userId = localStorage.getItem('userId');
+    const [status, setStatus] = useState(0);
 
     useEffect(() => {
 
@@ -20,7 +21,7 @@ const SingleCard = () => {
                 try {
                     const response = await fetch(`/api/v1/user/${userId}`);
                     const data = await response.json();
-                    setUserName(data.name);
+                    response.status !== 404 ? setUserName(data.name) : setUserName('');
                 } catch (error) {
                     message.error('Error fetching user name:', error);
                 }
@@ -31,7 +32,7 @@ const SingleCard = () => {
             try {
                 const response = await fetch(`/api/v1/comment/?postId=${id}`);
                 const data = await response.json();
-                setFeedbacks(data);
+                response.status !== 404 ? setFeedbacks(data) : setFeedbacks([]);
             } catch (error) {
                 message.error('Error fetching comments:', error);
             }
@@ -46,7 +47,7 @@ const SingleCard = () => {
         try {
             const response = await fetch(`/api/v1/post/${id}`);
             const data = await response.json();
-            setPost(data);
+            response.status !== 404 ? setPost(data) : setStatus(404);
         } catch (error) {
             message.error('Error fetching post:', error);
         }
@@ -56,7 +57,7 @@ const SingleCard = () => {
         try {
             const response = await fetch(`/api/v1/comment/?postId=${id}`);
             const data = await response.json();
-            setFeedbacks(data);
+            response.status !== 404 ? setFeedbacks(data) : setFeedbacks([]);
         } catch (error) {
             message.error('Error fetching comments:', error);
         }
@@ -130,13 +131,14 @@ const SingleCard = () => {
         }
     };
 
-    if (!post) {
+    if (!post && status !== 404) {
         return <div>Loading...</div>;
     }
 
     return (
         <div>
             <Header />
+            {post ?
             <div className='singleCardContainer'>
                 <div className='singleCard'>
                     <div className='postAuthor'>
@@ -242,7 +244,16 @@ const SingleCard = () => {
                     Back
                 </Button>
             </div>
-
+            :
+            <div className='noPostContainer'>
+                <h1 style={{ 
+                    margin: '13% 0 13% 0', 
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)', 
+                    padding: '20px', 
+                    fontSize: '50px' }}>
+                        Post Not Found or Already Deleted</h1>
+            </div>
+            }
             <Footer />
         </div>
     );
