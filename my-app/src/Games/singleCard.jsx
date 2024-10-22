@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Rate, Input, Button, message } from 'antd';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
+import { Circles } from 'react-loader-spinner'
 
 const SingleCard = () => {
     const { id } = useParams();
@@ -132,7 +133,18 @@ const SingleCard = () => {
     };
 
     if (!post && status !== 404) {
-        return <div>Loading...</div>;
+        return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <Circles
+                height="500"
+                width="500"
+                color="#de7f69"
+                ariaLabel="circles-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                />
+            </div>
+        // return <div>Loading...</div>;
     }
 
     return (
