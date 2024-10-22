@@ -215,7 +215,7 @@ const SingleCard = () => {
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
                             <div key={index} className='singleFeedback'>
-                                <Link className='feedbackAuthor' to={`/user/${post.user.id}`}>
+                                <Link className='feedbackAuthor' to={`/user/${fb.user.id}`}>
                                     <img src={fb.user?.image} alt={fb.user?.name} className='feedbackAuthorPic' />
                                     <p className='feedbackAuthorName'>{fb.user?.name}</p>
                                 </Link>
