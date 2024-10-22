@@ -12,7 +12,6 @@ const SingleCard = () => {
     const [feedback, setFeedback] = useState('');
     const [rating, setRating] = useState(0);
     const [feedbacks, setFeedbacks] = useState([]);
-
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
@@ -109,7 +108,7 @@ const SingleCard = () => {
                 method: 'DELETE',
             });
 
-            if (response.ok) {
+            if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(`Failed to delete post: ${errorData.message || 'Unknown error'}`);
             }
@@ -168,7 +167,8 @@ const SingleCard = () => {
                         )}
                     </div>
                 </div>
-                <RatingSection rating={rating} setRating={setRating} />
+                <RatingSection rating={rating} setRating={setRating} postId={post.id} userId={userId} />
+
                 {userId ? (
                     <div className='feedbackContainer'>
                         <h3>Leave Feedback</h3>
@@ -194,14 +194,12 @@ const SingleCard = () => {
                     </div>
                 )}
 
-                
-
                 <div className='submittedFeedbacks' style={{ marginTop: '20px' }}>
                     <h3>Customer Feedback</h3>
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
                             <div key={index} className='singleFeedback'>
-                                <p>{fb.user?.name}</p>                                
+                                <p>{fb.user?.name}</p>
                                 <h2>{fb.message}</h2>
                                 {userId && fb.user?.id === parseInt(userId, 10) && (
                                     <Button
@@ -217,7 +215,6 @@ const SingleCard = () => {
                         <p>No feedback yet. Be the first to leave feedback!</p>
                     )}
                 </div>
-
                 <Button
                     type="default"
                     className='backBtn'
@@ -232,14 +229,76 @@ const SingleCard = () => {
     );
 };
 
-const RatingSection = ({ rating, setRating }) => (
-    <div className='ratingSection'>
-        <h3>Rate the Post</h3>
-        <Rate onChange={setRating} value={rating} />
-        <Button type="primary" className='ratingBtn' style={{ marginTop: '10px' }}>
-            Submit Rating
-        </Button>
-    </div>
-);
+const RatingSection = ({ rating, setRating, postId, userId }) => {
+    const [existingRating, setExistingRating] = useState(null);
+
+    useEffect(() => {
+        const fetchUserRating = async () => {
+            if (userId) {
+                try {
+                    const response = await fetch(`/api/v1/post/rate/${postId}?userId=${userId}`);
+                    const data = await response.json();
+
+                    if (data && data.postRate !== undefined) {
+                        setExistingRating(data.postRate);
+                    }
+                } catch (error) {
+                    message.error('Error fetching user rating');
+                }
+            }
+        };
+
+        fetchUserRating();
+    }, [postId, userId]);
+
+    const handleRatingSubmit = async () => {
+        if (!userId) {
+            message.error('You need to be logged in to submit a rating.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/v1/post/rate/${postId}?userId=${userId}&rating=${rating}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit rating');
+            }
+
+            message.success('Rating submitted successfully!');
+            setExistingRating(rating);
+        } catch (error) {
+            message.error(error.message);
+        }
+    };
+
+    return (
+        <div className='ratingSection'>
+            {userId ? (
+                existingRating ? (
+                    <>
+                        <Rate disabled value={existingRating} />
+                        <p>You have already rated this post.</p>
+                    </>
+                ) : (
+                    <>
+                        <h3>Rate the Post</h3>
+                        <Rate onChange={setRating} value={rating} />
+                        <Button type="primary" className='ratingBtn' style={{ marginTop: '10px' }} onClick={handleRatingSubmit}>
+                            Submit Rating
+                        </Button>
+                    </>
+                )
+            ) : (
+                <p>Please register or log in to rate this post.</p>
+            )}
+        </div>
+    );
+};
+
 
 export default SingleCard;
