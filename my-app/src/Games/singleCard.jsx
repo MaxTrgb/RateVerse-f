@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Rate, Input, Button, message } from 'antd';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
@@ -15,6 +15,7 @@ const SingleCard = () => {
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
+        // Fetching post, user name, and comments on mount
         const fetchPost = async () => {
             try {
                 const response = await fetch(`/api/v1/post/${id}`);
@@ -49,8 +50,18 @@ const SingleCard = () => {
 
         fetchPost();
         fetchUserName();
-        fetchComments();
+        fetchComments(); // Call fetchComments here
     }, [id, userId]);
+
+    const fetchComments = async () => {
+        try {
+            const response = await fetch(`/api/v1/comment/?postId=${id}`);
+            const data = await response.json();
+            setFeedbacks(data);
+        } catch (error) {
+            message.error('Error fetching comments:', error);
+        }
+    };
 
     const handleSubmitFeedback = async () => {
         if (!feedback) {
@@ -78,8 +89,8 @@ const SingleCard = () => {
             }
 
             message.success('Feedback submitted successfully');
-            setFeedbacks([...feedbacks, { ...newComment, userName }]);
-            setFeedback('');
+            setFeedback(''); // Clear the feedback input
+            await fetchComments(); // Fetch the updated feedback list
         } catch (error) {
             message.error(error.message);
         }
@@ -130,9 +141,13 @@ const SingleCard = () => {
             <div className='singleCardContainer'>
                 <div className='singleCard'>
                     <div className='postAuthor'>
-                        <p className='postUserName'>
-                            <b>{post.user.name}</b>
-                        </p>
+                        <Link className='postAuthorLink' to={`/user/${post.user.id}`}>
+                            <img src={post.user.image} alt={post.user.name} className='postAuthorPic' />
+                            <p className='postUserName'>
+                                <b>{post.user.name}</b>
+                            </p>
+                        </Link>
+
                         <p className='postDate'>
                             {new Date(post.createdAt).toLocaleDateString('en-US', {
                                 day: 'numeric',
@@ -167,6 +182,7 @@ const SingleCard = () => {
                         )}
                     </div>
                 </div>
+
                 <RatingSection rating={rating} setRating={setRating} postId={post.id} userId={userId} />
 
                 {userId ? (
@@ -199,7 +215,11 @@ const SingleCard = () => {
                     {feedbacks.length > 0 ? (
                         feedbacks.map((fb, index) => (
                             <div key={index} className='singleFeedback'>
-                                <p>{fb.user?.name}</p>
+                                <Link className='feedbackAuthor' to={`/user/${post.user.id}`}>
+                                    <img src={fb.user?.image} alt={fb.user?.name} className='feedbackAuthorPic' />
+                                    <p className='feedbackAuthorName'>{fb.user?.name}</p>
+                                </Link>
+
                                 <h2>{fb.message}</h2>
                                 {userId && fb.user?.id === parseInt(userId, 10) && (
                                     <Button
@@ -269,8 +289,7 @@ const RatingSection = ({ rating, setRating, postId, userId }) => {
                 throw new Error('Failed to submit rating');
             }
 
-            message.success('Rating submitted successfully!');
-            setExistingRating(rating);
+            message.success('Rating submitted successfully');
         } catch (error) {
             message.error(error.message);
         }
@@ -278,27 +297,13 @@ const RatingSection = ({ rating, setRating, postId, userId }) => {
 
     return (
         <div className='ratingSection'>
-            {userId ? (
-                existingRating ? (
-                    <>
-                        <Rate disabled value={existingRating} />
-                        <p>You have already rated this post.</p>
-                    </>
-                ) : (
-                    <>
-                        <h3>Rate the Post</h3>
-                        <Rate onChange={setRating} value={rating} />
-                        <Button type="primary" className='ratingBtn' style={{ marginTop: '10px' }} onClick={handleRatingSubmit}>
-                            Submit Rating
-                        </Button>
-                    </>
-                )
-            ) : (
-                <p>Please register or log in to rate this post.</p>
-            )}
+            <Rate
+                value={existingRating || rating}
+                onChange={setRating}
+                onClick={handleRatingSubmit}
+            />
         </div>
     );
 };
-
 
 export default SingleCard;
