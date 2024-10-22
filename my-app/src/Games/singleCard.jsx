@@ -15,7 +15,7 @@ const SingleCard = () => {
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
-        // Fetching post, user name, and comments on mount
+       
         const fetchPost = async () => {
             try {
                 const response = await fetch(`/api/v1/post/${id}`);
@@ -50,7 +50,7 @@ const SingleCard = () => {
 
         fetchPost();
         fetchUserName();
-        fetchComments(); // Call fetchComments here
+        fetchComments(); 
     }, [id, userId]);
 
     const fetchComments = async () => {
@@ -89,8 +89,8 @@ const SingleCard = () => {
             }
 
             message.success('Feedback submitted successfully');
-            setFeedback(''); // Clear the feedback input
-            await fetchComments(); // Fetch the updated feedback list
+            setFeedback('');
+            await fetchComments(); 
         } catch (error) {
             message.error(error.message);
         }
