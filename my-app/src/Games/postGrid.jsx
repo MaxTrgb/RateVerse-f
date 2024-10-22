@@ -49,7 +49,9 @@ const PostGrid = ({ userId, userName }) => {
                     description: post.content,
                     date: post.createdAt,
                     user: {
-                        name: post.user.name
+                        id: post.user.id,
+                        name: post.user.name,                      
+
                     }
                 }));
 
@@ -94,6 +96,8 @@ const PostGrid = ({ userId, userName }) => {
                         userName={post.user.name}
                         createdAt={post.date}
                         authorName={post.user.name}
+                        authorId={post.user.id}     
+                                          
                     />
 
                 ))}

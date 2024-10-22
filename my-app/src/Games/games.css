@@ -19,22 +19,58 @@
     padding-left: 0;
     padding-right: 0;
 }
+.postDate {
+    font-size: 12px !important; 
+}
 
+.postUserName {
+    font-size: 16px !important; 
+}
+
+.postAuthorLink{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+    justify-content: center;    
+    border-radius: 10px;
+    padding: 0%;
+}
+.postAuthorLink .postAuthorPic{
+    padding: 5px;
+}
+.postAuthorLink .postUserName{
+    padding: 5px;
+}
+.postAuthorLink:hover{
+    background-color: #222831 !important;
+}
 .card:hover {
     -webkit-box-shadow: 0 0 15px #9B3922;
     box-shadow: 0 0 15px #9B3922;
     transform: scale(1.05);
 }
-.postUserName, .postDate{
-    color: gray ;
+
+.postUserName,
+.postDate {
+    color: gray;
     padding: 10px;
 }
-
+.postAuthor{
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+}
+.postAuthor .postAuthorPic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;   
+}
 .card img {
     width: 450px;
     height: 450px;
-    
-    object-fit:contain;
+    object-fit: contain;
     border-radius: 10px;
     padding: 20px;
 }
@@ -71,14 +107,17 @@
     white-space: normal;
     max-height: 60px;
 }
-.postAuthor{
+
+.postAuthor {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
+
 /* Single Card  */
 
 .singleCardContainer {
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +130,6 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
@@ -103,7 +141,7 @@
 
 .singleCard img {
     max-height: 500px;
-    
+
     border-radius: 10px;
 }
 
@@ -130,13 +168,15 @@
     margin-bottom: 10px;
     color: lightgray;
 }
-.postActions{
+
+.postActions {
     margin: 20px;
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
-.postActions button{
+
+.postActions button {
     padding: 10px;
     border-radius: 10px;
     border: none;
@@ -144,10 +184,12 @@
     background-color: #222831;
     font-weight: 600;
 }
-.postActions button:hover{
+
+.postActions button:hover {
     background-color: #9B3922 !important;
     color: #222831 !important;
 }
+
 .feedbackBtn {
     background-color: gray;
     color: #222831
@@ -166,14 +208,16 @@
 .backBtn:hover {
     color: #9B3922 !important;
 }
-.feedbackNotice{
+
+.feedbackNotice {
     color: lightgray !important;
     border: gray 1px solid;
     border-radius: 14px;
     padding: 20px;
-   
+
     background-color: rgba(0, 0, 0, 0.9);
 }
+
 .feedbackContainer {
     gap: 10px;
     margin-top: 30px;
@@ -185,10 +229,12 @@
     background-color: rgba(0, 0, 0, 0.8);
     width: 90%;
 }
-.singleCardContainer .singleCard  h1{
+
+.singleCardContainer .singleCard h1 {
     color: #9B3922 !important;
     text-shadow: black 0.1em 0.1em 0.2em !important;
 }
+
 .feedbackContainer textarea {
     background-color: #222831 !important;
     border-color: lightgray !important;
@@ -218,31 +264,114 @@
 .submittedFeedbacks {
     margin-bottom: 20px;
     margin-left: 20px;
-    margin-right: 20px;   
+    margin-right: 20px;
     width: 90%;
     padding: 20px;
     border-radius: 10px;
 }
-.submittedFeedbacks h3{
+
+.submittedFeedbacks h3 {
     color: #9B3922 !important;
     text-shadow: black 0.1em 0.1em 0.2em !important;
 }
-.submittedFeedbacks p{
+
+.submittedFeedbacks p {
     color: lightgray !important;
 }
-.singleFeedback{
+
+.singleFeedback {
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 20px;
-    margin: 10px;
-   
+    margin-bottom: 20px;
 }
-.singleFeedback P{
+
+.singleFeedback P {
     color: gray !important;
 }
-.singleFeedback h2{
+
+.singleFeedback h2 {
     color: lightgray !important;
     font-weight: 100;
+}
+
+.ratingSection {
+    background-color: #9B3922;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    width:97%;
+    color: lightgray;
+}
+
+.ratingBtn {
+    background-color: #222831;
+    color: lightgray;
+    border-radius: 10px;
+    padding: 30px;
+    border: none;
+}
+
+.ratingBtn:hover {
+    background-color: #222831 !important;
+    color: #9B3922 !important;
+    transform: scale(1.05);
+}
+
+.ratingSection {
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.ratingSection h3 {
+    font-size: 3rem;    
+    text-shadow: #222831 0.1em 0.1em 0.2em;
+    margin-top: 10px;
+}
+
+.ratingSection .ant-rate {
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+}
+
+.ratingSection .ratingBtn {
+    font-size: 1.5rem;
+    color: gray;
+}
+.feedbackAuthor{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: fit-content;
+    padding: 5px;
+    margin: 0%;    
+    border-radius: 10px;  
+}
+.feedbackAuthor:hover{
+    cursor: pointer;
+    background-color: #222831;
+}
+.feedbackAuthor .feedbackAuthorPic {        
+    padding: 0%;
+    margin: 0%;
+}
+.feedbackAuthor .feedbackAuthorName {
+    padding: 10px;
+    margin: 0%;
+}
+.feedbackAuthorPic{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 1px solid gray;
 }
 /* create post */
 .createPost {
@@ -251,7 +380,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    height:  100vh;
+    height: 100vh;
 }
 
 .createPostContainer {
@@ -286,15 +415,16 @@
 .createPostContainer input::placeholder,
 .createPostContainer textarea::placeholder {
     color: lightgray;
-    
 }
+
 .createPostContainer .ant-input,
 .createPostContainer .ant-input-text-area {
-    background-color: #222831; 
-    border: 1px solid lightgray; 
+    background-color: #222831;
+    border: 1px solid lightgray;
     color: lightgray;
-    padding: 10px; 
+    padding: 10px;
 }
+
 .createPostBtn {
     background-color: gray;
     color: lightgray;
@@ -318,6 +448,7 @@
     display: flex;
     gap: 10px;
 }
+
 .editBtn {
     background-color: gray;
     color: lightgray;
@@ -329,6 +460,7 @@
     background-color: #9B3922 !important;
     color: #222831 !important;
 }
+
 .deleteBtn {
     background-color: gray;
     color: lightgray;
@@ -338,6 +470,7 @@
     background-color: #9B3922 !important;
     color: #222831 !important;
 }
+
 /* edit post */
 
 .editPageContainer {
@@ -346,42 +479,42 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.9); 
-    color: lightgray; 
+    background-color: rgba(0, 0, 0, 0.9);
+    color: lightgray;
     border-radius: 10px;
-    margin: 20px; 
-    
+    margin: 20px;
+
 }
 
 .editPostForm {
     display: flex;
     flex-direction: column;
-    width: 50%; 
+    width: 50%;
     gap: 20px;
 }
 
 .editPostForm h1 {
-    color: white; 
+    color: white;
     margin-bottom: 20px;
 }
 
 .editPostForm .ant-input,
 .editPostForm .ant-input-text-area {
-    background-color: #222831; 
-    border: 1px solid lightgray; 
+    background-color: #222831;
+    border: 1px solid lightgray;
     color: lightgray;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .editPostForm .ant-input::placeholder,
 .editPostForm .ant-input-text-area::placeholder {
-    color: lightgray; 
+    color: lightgray;
 }
 
 .editPostForm .ant-btn {
-    background-color: gray; 
-    color: lightgray; 
-    border-radius: 10px; 
+    background-color: gray;
+    color: lightgray;
+    border-radius: 10px;
 }
 
 .editPostForm .ant-btn:hover {
@@ -390,19 +523,20 @@
 }
 
 .backBtn {
-    background-color: transparent !important; 
-    border: none; 
+    background-color: transparent !important;
+    border: none;
     color: gray !important;
 }
 
 .backBtn:hover {
-    color: #9B3922 !important; 
+    color: #9B3922 !important;
 }
 
 
 .loading {
     color: lightgray;
     font-size: 16px;
+
     text-align: center; 
 }
 
