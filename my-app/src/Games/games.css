@@ -405,3 +405,15 @@
     font-size: 16px;
     text-align: center; 
 }
+
+.postTitle {
+    background-color: rgba(0, 0, 0, 0.9);  
+    margin: 0; 
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+    text-align: center;
+    color: #9B3922;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-size: 38px;
+}
