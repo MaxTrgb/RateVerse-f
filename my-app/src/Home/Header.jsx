@@ -53,7 +53,7 @@ const Header = () => {
             </div>
             <div>
                 {isAuthorized && userInfo && (
-                    <Link to="/user">
+                    <Link to={`/user/${userInfo.id}`}>
                         <img
                             src={userInfo.image}
                             alt=""

@@ -4,7 +4,7 @@ import Tools from '../Home/Tools';
 import './games.css';
 
 
-const PostGrid = () => {
+const PostGrid = ({ userId, userName }) => {
     const [posts, setPosts] = useState([]);
     const [sortCriteria, setSortCriteria] = useState(() => {
         const savedSort = localStorage.getItem('activeSort');
@@ -36,7 +36,8 @@ const PostGrid = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('/api/v1/post/');
+                const url = userId ? `/api/v1/post/?userId=${userId}` : '/api/v1/post/';
+                const response = await fetch(url);
                 const apiPosts = await response.json();
 
                 const mappedPosts = apiPosts.map(post => ({
@@ -61,7 +62,7 @@ const PostGrid = () => {
         };
 
         fetchPosts();
-    }, [sortCriteria]);
+    }, [sortCriteria, userId]);
 
     const handleSortChange = (criteria) => {
         setSortCriteria(criteria);
@@ -75,11 +76,13 @@ const PostGrid = () => {
     return (
         <div>
 
-            <Tools
+            {!userId 
+            ? <Tools
                 onSortChange={handleSortChange}
                 onSearchChange={setSearchTerm}
                 activeSort={sortCriteria}
             />
+            : <h2 className='postTitle'>{userName}'s Posts</h2>}
             <div className='postGrid'>
                 {filteredPosts.map(post => (
                     <PostItem
