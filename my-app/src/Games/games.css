@@ -141,7 +141,6 @@
 
 .singleCard img {
     max-height: 500px;
-
     border-radius: 10px;
 }
 
@@ -253,7 +252,6 @@
     margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
-
 }
 
 .feedbackContainer textarea::placeholder {
@@ -502,7 +500,6 @@
     color: lightgray;
     border-radius: 10px;
     margin: 20px;
-
 }
 
 .editPostForm {
@@ -555,7 +552,6 @@
 .loading {
     color: lightgray;
     font-size: 16px;
-
     text-align: center; 
 }
 
