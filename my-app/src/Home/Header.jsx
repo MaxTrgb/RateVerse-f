@@ -7,6 +7,7 @@ const Header = () => {
     const authRef = useRef();
     const isAuthorized = localStorage.getItem('userId');
     const [userInfo, setUserInfo] = useState(null);
+    const [totalPosts, setTotalPosts] = useState(0); 
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -25,7 +26,21 @@ const Header = () => {
             }
         };
 
+        const fetchTotalPosts = async () => {
+            try {
+                const response = await fetch('/api/v1/post/'); 
+                if (!response.ok) {
+                    throw new Error('Failed to fetch posts');
+                }
+                const posts = await response.json();
+                setTotalPosts(posts.length);
+            } catch (error) {
+                console.error('Error fetching total posts:', error);
+            }
+        };
+
         fetchUserInfo();
+        fetchTotalPosts();  
     }, [isAuthorized]);
 
     const handleRegisterClick = (event) => {
@@ -34,10 +49,8 @@ const Header = () => {
     };
 
     const handleRandomPostClick = () => {
-        
-        const totalPosts = 10; 
-        const randomId = Math.floor(Math.random() * totalPosts) + 1; 
-        return `/post/${randomId}`; 
+        const randomId = Math.floor(Math.random() * totalPosts) + 1;  
+        return `/post/${randomId}`;
     };
 
     return (
