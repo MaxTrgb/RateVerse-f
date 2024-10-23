@@ -258,9 +258,12 @@ const SingleCard = () => {
             :
             <div className='noPostContainer'>
                 <h1 style={{ 
-                    margin: '13% 0 13% 0', 
+                    margin: ' 0', 
                     backgroundColor: 'rgba(0, 0, 0, 0.9)', 
-                    padding: '20px', 
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',    
                     fontSize: '50px' }}>
                         Post Not Found or Already Deleted</h1>
             </div>
@@ -342,7 +345,8 @@ const RatingSection = ({ postId, userId, fetchPost }) => {
                 className='rateBtn'
             />
 
-            {existingRating && (
+            {existingRating!==null && (
+                
                 <p className='alreadyRated'>
                     You have rated this game.
                 </p>

@@ -384,10 +384,9 @@
     transition-duration: 0.3s;    
 }
 .alreadyRated{
-    margin-bottom: 20px;
-    padding: 50px;
+    margin-bottom: 20px;   
     text-shadow: #222831 0.1em 0.1em 0.2em;
-    color: gray;
+    color: lightgray;
 }
 .rateBtn:hover{
     background-color: #9B3927;
