@@ -21,23 +21,25 @@ const UserPage = () => {
     const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const response = await fetch(`/api/v1/user/${id == null ? userId : id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user info');
-                }
-                const data = await response.json();
-                setUserInfo(data);
-            } catch (error) {
-                message.error('Failed to fetch user info');
-            }
-        };
+        fetchUserInfo();
 
         if (userId || id) {
             fetchUserInfo();
         }
     }, [id, userId]);
+
+    const fetchUserInfo = async () => {
+        try {
+            const response = await fetch(`/api/v1/user/${id == null ? userId : id}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user info');
+            }
+            const data = await response.json();
+            setUserInfo(data);
+        } catch (error) {
+            message.error('Failed to fetch user info');
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -55,29 +57,6 @@ const UserPage = () => {
         e.preventDefault();
 
         let updatedUserInfo = { ...userInfo };
-
-        // if (imageFile) {
-        //     const formData = new FormData();
-        //     formData.append('file', imageFile);
-        //     formData.append('upload_preset', 'your_upload_preset');
-
-        //     try {
-        //         const uploadResponse = await fetch('your_image_upload_url', {
-        //             method: 'POST',
-        //             body: formData,
-        //         });
-
-        //         if (!uploadResponse.ok) {
-        //             throw new Error('Image upload failed');
-        //         }
-
-        //         const uploadData = await uploadResponse.json();
-        //         updatedUserInfo.image = uploadData.secure_url;
-        //     } catch (error) {
-        //         message.error('Failed to upload image');
-        //         return;
-        //     }
-        // }
 
         const formData = new FormData();
         formData.append('name', updatedUserInfo.name);
@@ -104,6 +83,8 @@ const UserPage = () => {
         } catch (error) {
             message.error('Failed to update user info');
         }
+        fetchUserInfo();
+        setImageFile(null);
     };
 
     const handleLogout = () => {
