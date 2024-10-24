@@ -1,51 +1,47 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import React from 'react';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom'; 
 import styles from './Form.module.css';
 
 const initialValues = {
     name: '',
     password: '',
-    image: '',
-    description: '',
 };
-
-
-const submitHandler = async (values, formikBag) => {
-    try {
-        const response = await fetch('/auth/register', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log("Registration successful:", data);
-            localStorage.setItem('userId', data.userId);
-            window.location.reload();
-        } else {
-            console.error("Registration failed:", data.message);
-            alert(`Registration failed: ${data.message}`);
-        }
-    } catch (error) {
-        console.error("An error occurred during registration:", error);
-        alert("An error occurred. Please try again.");
-    }
-};
-
 
 const RegistrationSchema = Yup.object().shape({
     name: Yup.string().min(2, "Too short").max(50, "Too long").required("Name is required!"),
     password: Yup.string().min(4).max(20).required("Password is required!"),
-    image: Yup.string().url("Must be a valid URL").required("Image URL is required!"),
-    description: Yup.string().min(5, "Description too short").max(100, "Description too long").required("Description is required!"),
 });
 
 const Registration = ({ toggleForm }) => {
+    const navigate = useNavigate();
+
+    const submitHandler = async (values, formikBag) => {
+        try {
+            const response = await fetch('/auth/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {            
+                localStorage.setItem('userId', data.userId);                
+                navigate(`/user/${data.userId}`);
+            } else {
+                console.error("Registration failed:", data.message);
+                alert(`Registration failed: ${data.message}`);
+            }
+        } catch (error) {
+            console.error("An error occurred during registration:", error);
+            alert("An error occurred. Please try again.");
+        }
+    };
+
     return (
         <div className={styles.registrationForm}>
             <h2>Registration</h2>
@@ -84,34 +80,6 @@ const Registration = ({ toggleForm }) => {
                             />
                         </div>
 
-                        <div className={styles.field}>
-                            <Field
-                                name="image"
-                                type="text"
-                                placeholder="Image URL"
-                                className={styles.input}
-                            />
-                            <ErrorMessage
-                                name="image"
-                                component="div"
-                                className={styles.invalid}
-                            />
-                        </div>
-
-                        <div className={styles.field}>
-                            <Field
-                                name="description"
-                                type="text"
-                                placeholder="Description"
-                                className={styles.input}
-                            />
-                            <ErrorMessage
-                                name="description"
-                                component="div"
-                                className={styles.invalid}
-                            />
-                        </div>
-
                         <div className={styles.buttonGroup}>
                             <button type="submit" className={styles.button}>
                                 Submit
@@ -129,6 +97,6 @@ const Registration = ({ toggleForm }) => {
             </Formik>
         </div>
     );
-}
+};
 
 export default Registration;

@@ -13,9 +13,9 @@ const CreatePost = () => {
     const [genre, setGenre] = useState('');
     const [description, setDescription] = useState('');
     const [imgUrl, setImgUrl] = useState('');
+    const [imgFile, setImgFile] = useState(null); 
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
-
 
     useEffect(() => {
         const fetchGenres = async () => {
@@ -31,8 +31,16 @@ const CreatePost = () => {
         fetchGenres();
     }, []);
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImgFile(file);
+            setImgUrl(URL.createObjectURL(file));
+        }
+    };
+
     const handleSubmit = async () => {
-        if (!title || !genre || !description || !imgUrl) {
+        if (!title || !genre || !description || (!imgUrl && !imgFile)) {
             message.error('Please fill in all fields');
             return;
         }
@@ -42,7 +50,7 @@ const CreatePost = () => {
         const newPost = {
             userId: parseInt(userId, 10),
             title,
-            image: imgUrl,
+            image: imgUrl,  
             content: description,
             genreId: parseInt(genre, 10)
         };
@@ -81,12 +89,7 @@ const CreatePost = () => {
             <div className='createPost'>
                 <div className='createPostContainer'>
                     <h1>Create Post</h1>
-                    <Input
-                        placeholder="Title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        style={{ marginBottom: '10px' }}
-                    />
+                    <p className='editTitle'>Genre:</p>
                     <Select
                         placeholder="Select Genre"
                         value={genre}
@@ -99,6 +102,16 @@ const CreatePost = () => {
                             </Option>
                         ))}
                     </Select>
+
+                    <p className='editTitle'>Title:</p>
+                    <Input
+                        placeholder="Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        style={{ marginBottom: '10px' }}
+                    />
+                   
+                    <p className='editTitle'>Description:</p>
                     <Input.TextArea
                         placeholder="Description"
                         value={description}
@@ -106,12 +119,23 @@ const CreatePost = () => {
                         rows={4}
                         style={{ marginBottom: '10px' }}
                     />
-                    <Input
-                        placeholder="Image URL"
-                        value={imgUrl}
-                        onChange={(e) => setImgUrl(e.target.value)}
-                        style={{ marginBottom: '10px' }}
-                    />
+                    
+                    <div className="image-upload-section">
+                        <p className='editTitle'>Image:</p>
+                        <Input
+                            placeholder="Image URL"
+                            value={imgUrl}
+                            onChange={(e) => setImgUrl(e.target.value)}
+                            style={{ marginBottom: '10px', width: '75%' }}
+                        />
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={handleFileChange} 
+                            style={{ marginLeft: '10px', display: 'inline-block' }} 
+                        />
+                    </div>
+                    
                     <div className='buttons'>
                         <Button
                             type="primary"

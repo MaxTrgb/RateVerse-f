@@ -17,6 +17,7 @@ const UserPage = () => {
     });
 
     const userId = localStorage.getItem('userId');
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -45,21 +46,52 @@ const UserPage = () => {
         }));
     };
 
+    const handleImageChange = (e) => {
+        setImageFile(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let updatedUserInfo = { ...userInfo };
+
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append('file', imageFile);
+            formData.append('upload_preset', 'your_upload_preset');
+
+            try {
+                const uploadResponse = await fetch('your_image_upload_url', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!uploadResponse.ok) {
+                    throw new Error('Image upload failed');
+                }
+
+                const uploadData = await uploadResponse.json();
+                updatedUserInfo.image = uploadData.secure_url;
+            } catch (error) {
+                message.error('Failed to upload image');
+                return;
+            }
+        }
+
+
         try {
             const response = await fetch(`/api/v1/user/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userInfo),
+                body: JSON.stringify(updatedUserInfo),
             });
             if (!response.ok) {
                 throw new Error('Failed to update user info');
             }
 
-
+            message.success('User info updated successfully');
         } catch (error) {
             message.error('Failed to update user info');
         }
@@ -74,7 +106,7 @@ const UserPage = () => {
         <div>
             <Header />
             <div className="user-page">
-                <main >
+                <main>
                     <h1>User Information</h1>
                     <div className="user-info">
                         <div>
@@ -84,12 +116,23 @@ const UserPage = () => {
                                     alt={`${userInfo.name}'s avatar`}
                                     className="ava"
                                 />
-
-                                <div className='rating'>
-                                    <Rate
-                                        disabled
-                                        value={userInfo.rating}
+                                <div className="image-upload-section">
+                                    <input
+                                        type="text"
+                                        name="image"
+                                        placeholder="Enter image URL"
+                                        value={userInfo.image}
+                                        onChange={handleChange}
                                     />
+                                    <input
+                                        className='image-upload-input'
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                    />
+                                </div>
+                                <div className='rating'>
+                                    <Rate disabled value={userInfo.rating} />
                                 </div>
                             </div>
 
@@ -118,6 +161,18 @@ const UserPage = () => {
                                                 required
                                             />
                                         </div>
+                                        <div className="form-group">
+                                            <label htmlFor="description">Description:</label>
+                                            <textarea
+                                                className='descriptionTxtArea'
+                                                type="description"
+                                                id="description"
+                                                name="description"
+                                                value={userInfo.description}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
                                         <button type="submit" className="submit-button">Update Info</button>
                                     </form>
                                     :
@@ -129,8 +184,6 @@ const UserPage = () => {
                             {id == null || userId === id ? <button onClick={handleLogout} className="logout-button">Logout</button> : null}
                         </div>
                     </div>
-
-
                 </main>
             </div>
             <PostGrid userId={id} userName={userInfo.name} />
