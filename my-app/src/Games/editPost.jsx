@@ -72,7 +72,7 @@ const EditPost = () => {
         formData.append('updatedAt', new Date().toISOString());
 
         if (selectedFile) {
-            formData.append('image', selectedFile);
+            formData.append('imageFile', selectedFile);
         } else {
             formData.append('image', image); 
         }
@@ -98,7 +98,7 @@ const EditPost = () => {
     // Handle file change
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
-        setImage('');
+        setImage(null);
     };
 
 

@@ -359,7 +359,7 @@ const RatingSection = ({ postId, userId, fetchPost }) => {
             )}
 
             <Rate
-                value={existingRating || 5}
+                value={existingRating || rate && 6}
                 onChange={handleRatingChange}
                 disabled={existingRating !== null}
                 className='rateBtn'
