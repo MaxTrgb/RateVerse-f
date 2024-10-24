@@ -1,11 +1,11 @@
 .user-page {
-    width: 90%; 
-    height: 530px; 
-    padding: 20px; 
-    background-color: rgba(0, 0, 0, 0.9);     
+    width: 90%;
+    height: 530px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
     color: lightgray;
     transition: all 0.3s ease-in-out;
-    margin: 0 auto; 
+    margin: 0 auto;
     border-radius: 14px;
     margin-top: 30px;
     padding-bottom: 30px;
@@ -18,9 +18,36 @@ h1 {
     margin-bottom: 20px;
 }
 
+.image-upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: lightgray;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.descriptionTxtArea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #222831;
+    color: lightgray;
+}
+
+.image-upload-input {
+    width: 50%;
+}
+
 .user-info {
     margin-top: 2em;
 }
+
 .user-info>div:nth-child(1) {
     display: flex;
     flex-direction: row;
@@ -29,12 +56,14 @@ h1 {
     gap: 12em;
     margin-bottom: 20px;
 }
+
 .user-info>div:nth-child(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .user-form {
     display: flex;
     flex-direction: column;
@@ -44,7 +73,7 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
-    width: 90%; 
+    width: 90%;
     padding: 20px;
 }
 
@@ -94,8 +123,8 @@ input:focus {
 .ava {
     width: 250px;
     height: 250px;
-    object-fit: cover;    
+    object-fit: cover;
     border-radius: 10%;
     margin: 20px auto;
-    border: 2px solid #9B3922; 
+    border: 2px solid #9B3922;
 }

@@ -97,18 +97,31 @@ const SingleCard = () => {
         }
     };
 
-    const handleDeleteFeedback = (indexToDelete) => {
+    const handleDeleteFeedback = async (indexToDelete) => {
         const feedbackToDelete = feedbacks[indexToDelete];
-
+    
         if (feedbackToDelete.user.id !== parseInt(userId, 10)) {
             message.error('You can only delete your own comments.');
             return;
         }
-
-        const updatedFeedbacks = feedbacks.filter((_, index) => index !== indexToDelete);
-        setFeedbacks(updatedFeedbacks);
-        message.success('Feedback deleted successfully');
+    
+        try {            
+            const response = await fetch(`/api/v1/comment/${feedbackToDelete.id}?userId=${userId}`, {
+                method: 'DELETE',
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to delete feedback.');
+            }   
+           
+            const updatedFeedbacks = feedbacks.filter((_, index) => index !== indexToDelete);
+            setFeedbacks(updatedFeedbacks);
+            message.success('Feedback deleted successfully');
+        } catch (error) {
+            message.error(error.message || 'Error deleting feedback');
+        }
     };
+    
 
     const handleEditPost = () => {
         navigate(`/edit-post/${post.id}`);
@@ -346,7 +359,7 @@ const RatingSection = ({ postId, userId, fetchPost }) => {
             )}
 
             <Rate
-                value={existingRating || rate}
+                value={existingRating || 5}
                 onChange={handleRatingChange}
                 disabled={existingRating !== null}
                 className='rateBtn'

@@ -12,13 +12,14 @@ const EditPost = () => {
     const [post, setPost] = useState(null);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(''); 
     const [genreId, setGenreId] = useState(null);
     const [genres, setGenres] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null);
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
 
-    // Fetch genres on component mount
+    // Fetch genres
     useEffect(() => {
         const fetchGenres = async () => {
             try {
@@ -32,11 +33,10 @@ const EditPost = () => {
                 message.error('Error fetching genres: ' + error.message);
             }
         };
-
         fetchGenres();
     }, []);
 
-    // Fetch post details on component mount
+    // Fetch post data
     useEffect(() => {
         const fetchPost = async () => {
             try {
@@ -49,37 +49,38 @@ const EditPost = () => {
                 setTitle(data.title);
                 setContent(data.content);
                 setImage(data.image);
-                setGenreId(data.genre ? data.genre.id : null); // Set genreId from fetched post
+                setGenreId(data.genre ? data.genre.id : null);
             } catch (error) {
                 message.error(`Error fetching post: ${error.message || 'Please try again later.'}`);
             }
         };
-
         fetchPost();
     }, [id]);
 
+    // Handle saving changes
     const handleSaveChanges = async () => {
-        // Validate that all fields are filled
-        if (!title || !content || !image || genreId === null) {
+        if (!title || !content || (!image && !selectedFile) || genreId === null) {
             message.error('Please fill in all fields');
             return;
         }
 
-        // Construct the updatedPost object
-        const updatedPost = {
-            title,
-            content,
-            image,
-            genreId, // Only send genreId
-            userId: parseInt(userId, 10),
-            updatedAt: new Date().toISOString(), // Set the updated timestamp
-        };
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('content', content);
+        formData.append('genreId', genreId);
+        formData.append('userId', parseInt(userId, 10));
+        formData.append('updatedAt', new Date().toISOString());
+
+        if (selectedFile) {
+            formData.append('image', selectedFile);
+        } else {
+            formData.append('image', image); 
+        }
 
         try {
             const response = await fetch(`/api/v1/post/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedPost),
+                body: formData,
             });
 
             if (!response.ok) {
@@ -94,7 +95,13 @@ const EditPost = () => {
         }
     };
 
-    // Show a loading spinner while fetching post data
+    // Handle file change
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+        setImage('');
+    };
+
+
     if (!post) {
         return <Spin size="large" />;
     }
@@ -105,12 +112,7 @@ const EditPost = () => {
             <div className='editPageContainer'>
                 <h1>Edit Post</h1>
                 <div className='editPostForm'>
-                    <Input
-                        placeholder='Title'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        style={{ marginBottom: '20px' }}
-                    />
+                    <p className='editTitle'>Genre:</p>
                     <Select
                         placeholder="Select Genre"
                         value={genreId}
@@ -123,6 +125,15 @@ const EditPost = () => {
                             </Option>
                         ))}
                     </Select>
+                    <p className='editTitle'>Title:</p>
+                    <Input
+                        placeholder='Title'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        style={{ marginBottom: '20px' }}
+                    />
+
+                    <p className='editTitle'>Discription:</p>
                     <Input.TextArea
                         placeholder='Content'
                         value={content}
@@ -130,13 +141,22 @@ const EditPost = () => {
                         rows={4}
                         style={{ marginBottom: '20px' }}
                     />
-                    <Input
-                        placeholder='Image URL'
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        style={{ marginBottom: '20px' }}
-                    />
-                    <Button type="primary" onClick={handleSaveChanges}>
+
+                    <p className='editTitle'>Image:</p>
+                    <div className='imageInput'>
+                        <Input
+                            className='imageInput'
+                            placeholder='Image URL'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
+                            style={{ marginBottom: '10px' }}
+                        />
+                        <div style={{ marginBottom: '20px' }}>
+                            <input type="file" onChange={handleFileChange} />
+                        </div>
+                    </div>
+
+                    <Button className='submitBtn' type="primary" onClick={handleSaveChanges}>
                         Save Changes
                     </Button>
                 </div>
