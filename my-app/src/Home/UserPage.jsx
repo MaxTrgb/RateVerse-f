@@ -14,29 +14,32 @@ const UserPage = () => {
         password: '',
         image: '',
         rating: 0.0,
+        description: '',
     });
 
     const userId = localStorage.getItem('userId');
     const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const response = await fetch(`/api/v1/user/${id == null ? userId : id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user info');
-                }
-                const data = await response.json();
-                setUserInfo(data);
-            } catch (error) {
-                message.error('Failed to fetch user info');
-            }
-        };
+        fetchUserInfo();
 
         if (userId || id) {
             fetchUserInfo();
         }
     }, [id, userId]);
+
+    const fetchUserInfo = async () => {
+        try {
+            const response = await fetch(`/api/v1/user/${id == null ? userId : id}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch user info');
+            }
+            const data = await response.json();
+            setUserInfo(data);
+        } catch (error) {
+            message.error('Failed to fetch user info');
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -55,37 +58,22 @@ const UserPage = () => {
 
         let updatedUserInfo = { ...userInfo };
 
+        const formData = new FormData();
+        formData.append('name', updatedUserInfo.name);
+        formData.append('password', updatedUserInfo.password);
+        formData.append('description', updatedUserInfo.description);
+
         if (imageFile) {
-            const formData = new FormData();
-            formData.append('file', imageFile);
-            formData.append('upload_preset', 'your_upload_preset');
-
-            try {
-                const uploadResponse = await fetch('your_image_upload_url', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!uploadResponse.ok) {
-                    throw new Error('Image upload failed');
-                }
-
-                const uploadData = await uploadResponse.json();
-                updatedUserInfo.image = uploadData.secure_url;
-            } catch (error) {
-                message.error('Failed to upload image');
-                return;
-            }
+            formData.append('imageFile', imageFile);
         }
-
+        else{
+            formData.append('image', updatedUserInfo.image);
+        }
 
         try {
             const response = await fetch(`/api/v1/user/${userId}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedUserInfo),
+                body: formData
             });
             if (!response.ok) {
                 throw new Error('Failed to update user info');
@@ -95,6 +83,8 @@ const UserPage = () => {
         } catch (error) {
             message.error('Failed to update user info');
         }
+        fetchUserInfo();
+        setImageFile(null);
     };
 
     const handleLogout = () => {
@@ -116,7 +106,8 @@ const UserPage = () => {
                                     alt={`${userInfo.name}'s avatar`}
                                     className="ava"
                                 />
-                                <div className="image-upload-section">
+                                {id == null || userId === id
+                                    ? <div className="image-upload-section">
                                     <input
                                         type="text"
                                         name="image"
@@ -131,6 +122,7 @@ const UserPage = () => {
                                         onChange={handleImageChange}
                                     />
                                 </div>
+                                : null}
                                 <div className='rating'>
                                     <Rate disabled value={userInfo.rating} />
                                 </div>
@@ -176,7 +168,10 @@ const UserPage = () => {
                                         <button type="submit" className="submit-button">Update Info</button>
                                     </form>
                                     :
-                                    <h1>{userInfo.name}</h1>
+                                    <>
+                                        <h1>{userInfo.name}</h1>
+                                        <h2>{userInfo.description}</h2>
+                                    </>
                                 }
                             </div>
                         </div>

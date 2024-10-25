@@ -12,7 +12,7 @@ const CreatePost = () => {
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('');
     const [description, setDescription] = useState('');
-    const [imgUrl, setImgUrl] = useState('');
+    const [imgUrl, setImgUrl] = useState(null);
     const [imgFile, setImgFile] = useState(null); 
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const CreatePost = () => {
         const file = e.target.files[0];
         if (file) {
             setImgFile(file);
-            setImgUrl(URL.createObjectURL(file));
+            setImgUrl(null);
         }
     };
 
@@ -47,23 +47,24 @@ const CreatePost = () => {
     
         const userId = localStorage.getItem('userId');
     
-        const newPost = {
-            userId: parseInt(userId, 10),
-            title,
-            image: imgUrl,  
-            content: description,
-            genreId: parseInt(genre, 10)
-        };
+        const formData = new FormData();
+        formData.append('userId', parseInt(userId, 10));
+        formData.append('title', title);
+        formData.append('content', description);
+        formData.append('genreId', parseInt(genre, 10));
+
+        if (imgFile) {
+            formData.append('imageFile', imgFile);
+        } else if (imgUrl) {
+            formData.append('image', imgUrl);
+        }
     
         setLoading(true);
     
         try {
             const response = await fetch('/api/v1/post/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newPost)
+                body: formData
             });
     
             if (!response.ok) {
@@ -73,7 +74,7 @@ const CreatePost = () => {
             const result = await response.json();
             if (result) { 
                 message.success('Post created successfully');
-                navigate(`/`); 
+                navigate(`/post/` + result.message); 
             }
         } catch (error) {
             message.error('Error creating post: ' + error.message);
@@ -130,9 +131,9 @@ const CreatePost = () => {
                         />
                         <input 
                             type="file" 
-                            accept="image/*" 
+                            accept="image/*,video/mp4, video/mov, video/webm"
                             onChange={handleFileChange} 
-                            style={{ marginLeft: '10px', display: 'inline-block' }} 
+                            style={{ marginLeft: '10px', display: 'inline-block', width: '75%' }} 
                         />
                     </div>
                     
