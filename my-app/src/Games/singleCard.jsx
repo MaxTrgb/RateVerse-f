@@ -14,6 +14,7 @@ const SingleCard = () => {
     const [feedbacks, setFeedbacks] = useState([]);
     const userId = localStorage.getItem('userId');
     const [status, setStatus] = useState(0);
+    const [mediaType, setMediaType] = useState('');
 
     useEffect(() => {
 
@@ -44,11 +45,20 @@ const SingleCard = () => {
         fetchComments();
     }, [id, userId]);
 
+    const determineMediaType = (fileName) => {
+        const extension = fileName.split('.').pop().toLowerCase();
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
+        if (['mp4', 'mov', 'webm'].includes(extension)) return 'video';
+        if (['mp3', 'wav', 'ogg'].includes(extension)) return 'audio';
+        if (extension === 'pdf') return 'pdf';
+        return 'unknown';
+    };
     const fetchPost = async () => {
         try {
             const response = await fetch(`/api/v1/post/${id}`);
             const data = await response.json();
             response.status !== 404 ? setPost(data) : setStatus(404);
+            response.status !== 404 ? setMediaType(determineMediaType(data.image)) : setMediaType('unknown');
         } catch (error) {
             message.error('Error fetching post:', error);
         }
@@ -182,7 +192,9 @@ const SingleCard = () => {
                             </p>
                         </div>
                         <div>
-                            <img src={post.image} alt={post.title} />
+                            {mediaType === 'unknown' && <img src={post.image} alt="Media" className="singleCard-media" />}
+                            {mediaType === 'image' && <img src={post.image} alt="Media" className="singleCard-media" />}
+                            {mediaType === 'video' && <video src={post.image} controls className="singleCard-media" />}
                         </div>
 
                         <div className="singleCard-details">

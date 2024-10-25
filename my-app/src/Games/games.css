@@ -67,7 +67,7 @@
     border-radius: 50%;
     object-fit: cover;   
 }
-.card img {
+.card .card-media {
     width: 450px;
     height: 450px;
     object-fit: contain;
@@ -139,7 +139,7 @@
     transition: all 0.1s ease-in-out;
 }
 
-.singleCard img {
+.singleCard .singleCard-media {
     max-height: 500px;
     border-radius: 10px;
 }

@@ -5,6 +5,7 @@ import { Rate } from 'antd';
 
 const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt, authorId }) => {
     const [authorImg, setAuthorImg] = useState('');
+    const [mediaType, setMediaType] = useState('');
 
     useEffect(() => {
         const fetchAuthorImg = async () => {
@@ -22,6 +23,19 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
 
         fetchAuthorImg();
     }, [id]);
+    
+    useEffect(() => {
+        const determineMediaType = (fileName) => {
+            const extension = fileName.split('.').pop().toLowerCase();
+            if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
+            if (['mp4', 'mov', 'webm'].includes(extension)) return 'video';
+            if (['mp3', 'wav', 'ogg'].includes(extension)) return 'audio';
+            if (extension === 'pdf') return 'pdf';
+            return 'unknown';
+        };
+
+        setMediaType(determineMediaType(imgSrc));
+    }, [imgSrc]);
 
     return (
         <div>
@@ -45,7 +59,9 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                                     })}
                                 </p>
                             </div>
-                            <img src={imgSrc} alt="Post" />
+                            {mediaType === 'unknown' && <img src={imgSrc} alt="Media" className="card-media" />}
+                            {mediaType === 'image' && <img src={imgSrc} alt="Media" className="card-media" />}
+                            {mediaType === 'video' && <video src={imgSrc} controls className="card-media" />}
                         </div>
                     </div>
                     <div className="card-details">
