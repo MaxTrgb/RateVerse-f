@@ -82,14 +82,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover;   
-}
-.card .card-media {
-    width: 450px;
-    height: 450px;
-    object-fit: contain;
-    border-radius: 10px;
-    padding: 20px;
+    object-fit: cover;
 }
 
 
@@ -165,9 +158,7 @@
     padding-left: 100px;
     padding-right: 100px;
 }
-
-.singleCard .singleCard-media {
-
+.singleCard img {
     max-height: 500px;
     border-radius: 10px;
 }

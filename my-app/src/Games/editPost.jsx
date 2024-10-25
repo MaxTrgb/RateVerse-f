@@ -12,10 +12,10 @@ const EditPost = () => {
     const [post, setPost] = useState(null);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [image, setImage] = useState(''); 
+    const [image, setImage] = useState(''); // Ensure image URL is properly managed
     const [genreId, setGenreId] = useState(null);
     const [genres, setGenres] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null); // Handle selected file
     const navigate = useNavigate();
     const userId = localStorage.getItem('userId');
 
@@ -48,7 +48,7 @@ const EditPost = () => {
                 setPost(data);
                 setTitle(data.title);
                 setContent(data.content);
-                setImage(data.image);
+                setImage(data.image); // Ensure image URL is set properly
                 setGenreId(data.genre ? data.genre.id : null);
             } catch (error) {
                 message.error(`Error fetching post: ${error.message || 'Please try again later.'}`);
@@ -72,9 +72,9 @@ const EditPost = () => {
         formData.append('updatedAt', new Date().toISOString());
 
         if (selectedFile) {
-            formData.append('imageFile', selectedFile);
+            formData.append('image', selectedFile); // Upload new image
         } else {
-            formData.append('image', image); 
+            formData.append('image', image); // Keep existing image URL if no new file is uploaded
         }
 
         try {
@@ -98,7 +98,7 @@ const EditPost = () => {
     // Handle file change
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
-        setImage(null);
+        setImage('');
     };
 
 

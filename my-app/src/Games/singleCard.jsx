@@ -4,7 +4,6 @@ import { Rate, Input, Button, message } from 'antd';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
 import { Circles } from 'react-loader-spinner';
-import MediaComponent from './mediaComponent';
 
 const SingleCard = () => {
     const { id } = useParams();
@@ -15,7 +14,6 @@ const SingleCard = () => {
     const [feedbacks, setFeedbacks] = useState([]);
     const userId = localStorage.getItem('userId');
     const [status, setStatus] = useState(0);
-    const [mediaType, setMediaType] = useState('');
 
     useEffect(() => {
 
@@ -46,20 +44,11 @@ const SingleCard = () => {
         fetchComments();
     }, [id, userId]);
 
-    const determineMediaType = (fileName) => {
-        const extension = fileName.split('.').pop().toLowerCase();
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
-        if (['mp4', 'mov', 'webm'].includes(extension)) return 'video';
-        if (['mp3', 'wav', 'ogg'].includes(extension)) return 'audio';
-        if (extension === 'pdf') return 'pdf';
-        return 'unknown';
-    };
     const fetchPost = async () => {
         try {
             const response = await fetch(`/api/v1/post/${id}`);
             const data = await response.json();
             response.status !== 404 ? setPost(data) : setStatus(404);
-            response.status !== 404 ? setMediaType(determineMediaType(data.image)) : setMediaType('unknown');
         } catch (error) {
             message.error('Error fetching post:', error);
         }
@@ -193,7 +182,7 @@ const SingleCard = () => {
                             </p>
                         </div>
                         <div>
-                            <MediaComponent mediaType={mediaType} mediaSrc={post.image}/>
+                            <img src={post.image} alt={post.title} />
                         </div>
 
                         <div className="singleCard-details">
@@ -370,7 +359,7 @@ const RatingSection = ({ postId, userId, fetchPost }) => {
             )}
 
             <Rate
-                value={existingRating || rate && 6}
+                value={existingRating || 5}
                 onChange={handleRatingChange}
                 disabled={existingRating !== null}
                 className='rateBtn'

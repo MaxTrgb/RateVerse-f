@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './games.css';
 import { Rate } from 'antd';
-import MediaComponent from './mediaComponent';
 
 const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt, authorId }) => {
     const [authorImg, setAuthorImg] = useState('');
-    const [mediaType, setMediaType] = useState('');
 
     const truncateText = (text, maxLength) => {
         if (text.length > maxLength) {
@@ -31,19 +29,6 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
 
         fetchAuthorImg();
     }, [id]);
-    
-    useEffect(() => {
-        const determineMediaType = (fileName) => {
-            const extension = fileName.split('.').pop().toLowerCase();
-            if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) return 'image';
-            if (['mp4', 'mov', 'webm'].includes(extension)) return 'video';
-            if (['mp3', 'wav', 'ogg'].includes(extension)) return 'audio';
-            if (extension === 'pdf') return 'pdf';
-            return 'unknown';
-        };
-
-        setMediaType(determineMediaType(imgSrc));
-    }, [imgSrc]);
 
     return (
         <div>
@@ -67,7 +52,7 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                                     })}
                                 </p>
                             </div>
-                            <MediaComponent mediaType={mediaType} mediaSrc={imgSrc} className="PostItem"/>
+                            <img src={imgSrc} alt="Post" />
                         </div>
                     </div>
                     <div className="card-details">
