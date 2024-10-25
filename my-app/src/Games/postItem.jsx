@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './games.css';
 import { Rate } from 'antd';
+import MediaComponent from './mediaComponent';
 
 const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, createdAt, authorId }) => {
     const [authorImg, setAuthorImg] = useState('');
@@ -59,9 +60,7 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                                     })}
                                 </p>
                             </div>
-                            {mediaType === 'unknown' && <img src={imgSrc} alt="Media" className="card-media" />}
-                            {mediaType === 'image' && <img src={imgSrc} alt="Media" className="card-media" />}
-                            {mediaType === 'video' && <video src={imgSrc} controls className="card-media" />}
+                            <MediaComponent mediaType={mediaType} mediaSrc={imgSrc} className="PostItem"/>
                         </div>
                     </div>
                     <div className="card-details">
