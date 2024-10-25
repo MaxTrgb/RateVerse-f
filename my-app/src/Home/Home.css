@@ -1,58 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Protest+Strike&family=Sixtyfour+Convergence&display=swap');
- 
+
 * {
     font-family: protest strike;
 }
 
 .myHeader {
-    background-color: #222831;
-    padding: 20px;
-    padding-left: 7%;
-    padding-right: 7%;
-    text-align: center;
+    background-color: black;
+    padding: 10px;
+    width: 200px;
+    text-align: left;
     color: white;
+    position: fixed;
+    top: 0;
+    left: -200px;
+   
+    bottom: 0;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+   
+    justify-content: flex-start;
     align-items: center;
+    z-index: 101;
+    transition: left 0.3s ease;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.myHeader .user-avatar{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+.myHeader.visible {
+    left: 0;    
 }
+
+.myHeader .user-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
 .links {
-    display: flex;  
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;    
     gap: 100px;
 }
 
 .links a {
     text-decoration: none;
     color: lightgray;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .links a:hover {
-    color: #9B3922;
+    color: gray;
 }
 
 .logo {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     text-decoration: none;
-    color: #9B3922;    
+    color: gray;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.toggleButton {
+    position: fixed;
+    top: 80px;
+    left: 0px;
+    z-index: 101;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: left 0.3s ease;
+    font-size: 20px;     
 }
 
 
-.myBody {
-    padding: 20px;
+.myHeader.visible + .toggleButton {   
+    left: 100px;
+}
 
+.myBody {
+    margin: 0;
     padding-left: 6%;
     padding-right: 6%;
 }
 
 .myFooter {
-    background-color: #9B3922;
+    background-color: gray;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -81,8 +119,6 @@
 a {
     font-size: small;
     text-decoration: none;
-
-
 }
 
 .backToTopBtn {
@@ -97,38 +133,56 @@ a {
 
 .search {
     width: 50%;
+    padding-left: 10px;
 }
 
+.search button {
+    background-color: gray !important;
+    color: black !important;
+    border: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important     ;
+}
+
+.search button:hover {
+    background-color: black !important;
+    color: white !important;
+}
+.addPost{
+    padding-bottom: 30px;
+}
 .addPost button {
-    background-color: #222831;
-    color: #9B3922;
-    box-shadow: 4px 4px 4px #9B3922, -4px -4px 4px #9B3922;
-    font-size: 20px;
-    padding-top: 20px;
-    padding-bottom: 16px;
-    padding-left: 30px;
-    padding-right: 30px;
+    background-color: black;
+    color: gray;
+    box-shadow: gray 0.1em 0.1em 0.2em;
+    font-size: 18px;
+    margin: 10px;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
 
 .addPost button:hover {
-    background-color: #9B3922 !important;
-    color: #222831 !important;
-    box-shadow: 2px 2px 2px #222831, -2px -2px 2px #222831 !important;
+    background-color: gray !important;
+    color: black !important;
+    box-shadow: black 0.1em 0.1em 0.2em;
 }
 
 .myTools {
     display: flex;
-    justify-content: center;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-
+    padding: 5px;
+    padding-left: 20px;    
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 101;
+    background-color: black;
 }
 
 .myTools .search button {
-    background-color: #222831;
+    background-color: black;
+    box-shadow: gray 0.1em 0.1em 0.2em;
 }
 
 .sort {
@@ -139,23 +193,28 @@ a {
 .sortBtn {
     margin-left: 10px;
     margin-right: 10px;
-    background-color: #222831;
+    background-color: black;
     color: gray;
     transition: color 0.3s ease;
+    box-shadow: gray 0.1em 0.1em 0.2em;
 }
 
 .sortBtn.active {
-    color: lightgray;
+    color: black;
 
-    background-color: #9B3922 !important;
+    background-color: gray !important;
 }
 
 .sortBtn:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
+    color: black !important;
+    box-shadow: black 0.1em 0.1em 0.2em;
 }
-.user-avatar{
+
+.user-avatar {
     object-fit: cover;
 }
-.ant-modal-body form{
+
+.ant-modal-body form {
     padding: 20px;
 }

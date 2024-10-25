@@ -1,53 +1,68 @@
 .postGrid {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 5%;
+    margin: 0 auto; 
+    
 }
-
+.postGridContainer{
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .card {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.9);
-    margin-top: 30px;
-    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
-    padding-left: 0;
-    padding-right: 0;
+    height: 470px;
+    overflow: hidden;  
 }
+
+.card img {
+    width: 100%;
+    height: 200px;   
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 .postDate {
-    font-size: 12px !important; 
+    font-size: 12px !important;
 }
 
 .postUserName {
-    font-size: 16px !important; 
+    font-size: 16px !important;
 }
 
-.postAuthorLink{
+.postAuthorLink {
     text-decoration: none;
     display: flex;
     flex-direction: row;
-    align-items: center;    
-    justify-content: center;    
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     padding: 0%;
 }
-.postAuthorLink .postAuthorPic{
+
+.postAuthorLink .postAuthorPic {
     padding: 5px;
 }
-.postAuthorLink .postUserName{
+
+.postAuthorLink .postUserName {
     padding: 5px;
 }
-.postAuthorLink:hover{
+
+.postAuthorLink:hover {
     background-color: #222831 !important;
 }
+
 .card:hover {
-    -webkit-box-shadow: 0 0 15px #9B3922;
-    box-shadow: 0 0 15px #9B3922;
+    -webkit-box-shadow: 0 0 15px gray;
+    box-shadow: 0 0 15px gray;
     transform: scale(1.05);
 }
 
@@ -56,12 +71,14 @@
     color: gray;
     padding: 10px;
 }
-.postAuthor{
+
+.postAuthor {
     margin-bottom: 20px;
     padding: 10px;
     display: flex;
 }
-.postAuthor .postAuthorPic{
+
+.postAuthor .postAuthorPic {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -75,28 +92,27 @@
     padding: 20px;
 }
 
+
 .card-details {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    width: 50%;
+    padding: 10px;
+    text-align: center; 
+    flex-grow: 1;
 }
 
 .card-details h2 {
-    font-size: 48px;
+    font-size: 18px;
     margin-bottom: 10px;
-    color: #9B3922;
-    text-shadow: black 0.1em 0.1em 0.2em;
-}
-
-.card-details .genre {
-    color: gray !important;
+    color: lightgray;
+    text-shadow: gray 0.1em 0.1em 0.2em;
+    max-width: 100%;
 }
 
 .card-details p {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 10px;
     color: lightgray;
     display: -webkit-box;
@@ -105,7 +121,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    max-height: 60px;
 }
 
 .postAuthor {
@@ -113,6 +128,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    margin-top: auto;
+}
+
+.card-details .genre {
+    color: gray !important;
 }
 
 /* Single Card  */
@@ -129,17 +149,25 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    border-radius: 10px;
-    margin: 10px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;   
+    background-color: rgba(0, 0, 0, 0.5);
     margin-top: 30px;
     margin-bottom: 30px;
     transition: all 0.1s ease-in-out;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+.singlePostContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .singleCard .singleCard-media {
+
     max-height: 500px;
     border-radius: 10px;
 }
@@ -148,8 +176,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    justify-content: center;   
 }
 
 .singleCard-details h2 {
@@ -185,18 +212,20 @@
 }
 
 .postActions button:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
     color: #222831 !important;
 }
 
 .feedbackBtn {
-    background-color: gray;
-    color: #222831
+    background-color: black;
+    color: gray;
+    box-shadow: gray 0.1em 0.1em 0.2em;
 }
 
 .feedbackBtn:hover {
-    background-color: #9B3922 !important;
-    color: #222831 !important;
+    background-color: gray !important;
+    color: black !important;
+    box-shadow: black 0.1em 0.1em 0.2em;
 }
 
 .backBtn {
@@ -205,7 +234,7 @@
 }
 
 .backBtn:hover {
-    color: #9B3922 !important;
+    color: gray !important;
 }
 
 .feedbackNotice {
@@ -213,7 +242,6 @@
     border: gray 1px solid;
     border-radius: 14px;
     padding: 20px;
-
     background-color: rgba(0, 0, 0, 0.9);
 }
 
@@ -227,16 +255,17 @@
     padding: 10px;
     background-color: rgba(0, 0, 0, 0.8);
     width: 90%;
+    
 }
 
 .singleCardContainer .singleCard h1 {
-    color: #9B3922 !important;
+    color: gray !important;
     text-shadow: black 0.1em 0.1em 0.2em !important;
 }
 
 .feedbackContainer textarea {
-    background-color: #222831 !important;
-    border-color: lightgray !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    border-color: gray !important;
     color: gray !important;
 }
 
@@ -269,7 +298,7 @@
 }
 
 .submittedFeedbacks h3 {
-    color: #9B3922 !important;
+    color: gray !important;
     text-shadow: black 0.1em 0.1em 0.2em !important;
 }
 
@@ -282,6 +311,8 @@
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .singleFeedback P {
@@ -294,7 +325,7 @@
 }
 
 .ratingSection {
-    background-color: #9B3922;
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
@@ -302,8 +333,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;  
-    width:97%;
+    justify-content: center;
+    width: 97%;
     color: lightgray;
 }
 
@@ -314,7 +345,7 @@
 }
 
 .ratingSection h3 {
-    font-size: 3rem;    
+    font-size: 3rem;
     text-shadow: #222831 0.1em 0.1em 0.2em;
     margin-top: 10px;
 }
@@ -328,28 +359,33 @@
     font-size: 1.5rem;
     color: gray;
 }
-.feedbackAuthor{
+
+.feedbackAuthor {
     display: flex;
     flex-direction: row;
     align-items: center;
     max-width: fit-content;
     padding: 5px;
-    margin: 0%;    
-    border-radius: 10px;  
+    margin: 0%;
+    border-radius: 10px;
 }
-.feedbackAuthor:hover{
+
+.feedbackAuthor:hover {
     cursor: pointer;
     background-color: #222831;
 }
-.feedbackAuthor .feedbackAuthorPic {        
+
+.feedbackAuthor .feedbackAuthorPic {
     padding: 0%;
     margin: 0%;
 }
+
 .feedbackAuthor .feedbackAuthorName {
     padding: 10px;
     margin: 0%;
 }
-.feedbackAuthorPic{
+
+.feedbackAuthorPic {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -358,18 +394,21 @@
     margin-top: 20px;
     border: 1px solid gray;
 }
-.rateBtn{
-    padding-bottom: 20px;  
+
+.rateBtn {
+    padding-bottom: 20px;
+    transition: 0.2s ease-in-out;
 }
-.alreadyRated{
-    margin-bottom: 20px;   
+.rateBtn:active {
+    transform: scale(0.9);
+}
+.alreadyRated {
+    margin-bottom: 20px;
     text-shadow: #222831 0.1em 0.1em 0.2em;
     color: lightgray;
 }
-.rateBtn:hover{
-    background-color: #9B3927;
-   
-}
+
+
 /* create post */
 .createPost {
     display: flex;
@@ -428,7 +467,7 @@
 }
 
 .createPostBtn:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
     color: #222831 !important;
 }
 
@@ -438,7 +477,7 @@
 }
 
 .createPost.backBtn:hover {
-    color: #9B3922 !important;
+    color: gray !important;
 }
 
 .createPost .buttons {
@@ -447,10 +486,12 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.editTitle{
+
+.editTitle {
     margin: 0px;
     padding: 0px;
 }
+
 .editBtn {
     background-color: gray;
     color: lightgray;
@@ -459,7 +500,7 @@
 }
 
 .editBtn:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
     color: #222831 !important;
 }
 
@@ -469,7 +510,7 @@
 }
 
 .deleteBtn:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
     color: #222831 !important;
 }
 
@@ -520,7 +561,7 @@
 }
 
 .editPostForm .ant-btn:hover {
-    background-color: #9B3922 !important;
+    background-color: gray !important;
     color: #222831 !important;
 }
 
@@ -531,9 +572,10 @@
 }
 
 .backBtn:hover {
-    color: #9B3922 !important;
+    color: gray !important;
 }
-.image-upload-section{
+
+.image-upload-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -542,12 +584,14 @@
     background-color: rgba(0, 0, 0, 0.9);
     color: lightgray;
     border-radius: 10px;
-    margin: 20px;    
+    margin: 20px;
 }
-.submitBtn{
+
+.submitBtn {
     width: fit-content;
 }
-.imageInput{
+
+.imageInput {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -555,13 +599,14 @@
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.9);
     color: lightgray;
-    border-radius: 10px;    
+    border-radius: 10px;
     width: 100%;
 }
+
 .loading {
     color: lightgray;
     font-size: 16px;
-    text-align: center; 
+    text-align: center;
 }
 
 .postTitle {
@@ -572,11 +617,12 @@
     margin-top: 20px;
     text-shadow: #222831 0.1em 0.1em 0.2em;
 }
-.postTitleContainer{
+
+.postTitleContainer {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #9B3922;
+    
 }

@@ -2,12 +2,19 @@ import React, { useRef, useState, useEffect } from 'react';
 import Auth from '../Auth/Auth';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import leftArrow from '../assets/leftArrow.png'; 
+import rightArrow from '../assets/rightArrow.png'; 
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const authRef = useRef();
     const isAuthorized = localStorage.getItem('userId');
     const [userInfo, setUserInfo] = useState(null);
-    const [totalPosts, setTotalPosts] = useState(0); 
+    const [totalPosts, setTotalPosts] = useState(0);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -28,7 +35,7 @@ const Header = () => {
 
         const fetchTotalPosts = async () => {
             try {
-                const response = await fetch('/api/v1/post/'); 
+                const response = await fetch('/api/v1/post/');
                 if (!response.ok) {
                     throw new Error('Failed to fetch posts');
                 }
@@ -40,7 +47,7 @@ const Header = () => {
         };
 
         fetchUserInfo();
-        fetchTotalPosts();  
+        fetchTotalPosts();
     }, [isAuthorized]);
 
     const handleRegisterClick = (event) => {
@@ -49,34 +56,58 @@ const Header = () => {
     };
 
     const handleRandomPostClick = () => {
-        const randomId = Math.floor(Math.random() * totalPosts) + 1;  
+        const randomId = Math.floor(Math.random() * totalPosts) + 1;
         return `/post/${randomId}`;
     };
 
+    const toggleHeaderVisibility = () => {
+        setIsHeaderVisible((prev) => !prev);
+    };
+
     return (
-        <header className='myHeader'>
-            <Link to='/' className='logo'>RateVerse</Link>
-            <div className='links'>
-                <Link to={handleRandomPostClick()} onClick={handleRandomPostClick}>Feeling Lucky</Link>
-                <Link to='/'>Games</Link>
-                <a href="#contacts">Contacts</a>
-                {!isAuthorized && (
-                    <a href="/" onClick={handleRegisterClick}>Register</a>
-                )}
-            </div>
-            <div>
-                {isAuthorized && userInfo && (
-                    <Link to={`/user/${userInfo.id}`}>
-                        <img
-                            src={userInfo.image}
-                            alt=""
-                            className="user-avatar"
-                        />
-                    </Link>
-                )}
-            </div>
-            <Auth ref={authRef} />
-        </header>
+        <>
+            <header className={`myHeader ${isHeaderVisible ? 'visible' : ''}`}>
+                
+                <div className='links'>
+                    <Link to={handleRandomPostClick()} onClick={handleRandomPostClick}>Feeling Lucky</Link>
+                    <Link to='/'>Games</Link>
+                    <a href="#contacts">Contacts</a>
+                    {!isAuthorized && (
+                        <a href="/" onClick={handleRegisterClick}>Register</a>
+                    )}
+                </div>
+                <hr style={{ width: '80%', backgroundColor: 'gray' }} />
+                <div>
+                    {isAuthorized && userInfo && (
+                        <Link to={`/user/${userInfo.id}`}>
+                            <img
+                                src={userInfo.image}
+                                alt=""
+                                className="user-avatar"
+                            />
+                        </Link>
+                    )}
+                </div>
+                <Auth ref={authRef} />
+                {isAuthorized && (
+                <div className='addPost'>
+                    <Button
+                        type="primary"
+                        onClick={() => navigate('/create-post')}
+                        className='addPostBtn'>
+                        Add Post
+                    </Button>
+                </div>
+            )}
+            </header>
+            <button className="toggleButton" onClick={toggleHeaderVisibility}>
+                <img
+                    src={isHeaderVisible ? leftArrow : rightArrow}
+                    alt={isHeaderVisible ? 'Hide Header' : 'Show Header'}
+                    style={{ width: '20px', height: '20px', backgroundColor: 'transparent' }} 
+                />
+            </button>
+        </>
     );
 };
 

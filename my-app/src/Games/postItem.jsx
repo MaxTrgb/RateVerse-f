@@ -8,6 +8,13 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
     const [authorImg, setAuthorImg] = useState('');
     const [mediaType, setMediaType] = useState('');
 
+    const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength) + "...";
+        }
+        return text;
+    };
+
     useEffect(() => {
         const fetchAuthorImg = async () => {
             try {
@@ -45,7 +52,7 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                     <div>
                         <div>
                             <div className='postAuthor'>
-                                <Link className='postAuthorLink'to={`/user/${authorId}`}>
+                                <Link className='postAuthorLink' to={`/user/${authorId}`}>
                                     <img src={authorImg} alt="" className='postAuthorPic' />
                                     <p className='postUserName'>
                                         <b>{authorName}</b>
@@ -67,12 +74,12 @@ const PostItem = ({ id, imgSrc, title, genre, description, rating, authorName, c
                         <h2>{title}</h2>
                         <Rate disabled value={rating} />
                         <p className="genre">{genre}</p>
-                        <p>{description}</p>
+                        <p>{truncateText(description, 70)}</p>
                     </div>
                 </div>
             </Link>
         </div>
     );
-}
+};
 
 export default PostItem;
