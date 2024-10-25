@@ -131,7 +131,7 @@ const CreatePost = () => {
                         />
                         <input 
                             type="file" 
-                            accept="image/*" 
+                            accept="image/*,video/mp4, video/mov, video/webm"
                             onChange={handleFileChange} 
                             style={{ marginLeft: '10px', display: 'inline-block', width: '75%' }} 
                         />
