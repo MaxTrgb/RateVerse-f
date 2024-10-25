@@ -2,24 +2,18 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import { Input, Button } from 'antd';
+import { Link } from 'react-router-dom';
 const { Search } = Input;
 
-const Tools = ({ onSortChange, onSearchChange, activeSort }) => {
-    const navigate = useNavigate();
-    const isAuthorized = !!localStorage.getItem('userId');
+const Tools = ({ onSortChange, onSearchChange, activeSort }) => {    
 
     return (
         <div className='myTools'>
-            {isAuthorized && (
-                <div className='addPost'>
-                    <Button
-                        type="primary"
-                        onClick={() => navigate('/create-post')}
-                        className='addPostBtn'>                            
-                        Add Post
-                    </Button>
-                </div>
-            )}
+            <div>
+                <Link to='/' className='logo'>RateVerse</Link>
+            </div>
+
+            
             <div className='search'>
                 <Search
                     placeholder="Input search text..."
@@ -32,6 +26,7 @@ const Tools = ({ onSortChange, onSearchChange, activeSort }) => {
                 <Button
                     className={`sortBtn ${activeSort === 'date' ? 'active' : ''}`}
                     type="primary"
+
                     onClick={() => onSortChange('date')}>
                     Sort by Date
                 </Button>

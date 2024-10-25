@@ -1,6 +1,6 @@
 .user-page {
-    width: 90%;
-    height: 530px;
+    width: 50%;
+    height: 100%;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.9);
     color: lightgray;
@@ -13,7 +13,7 @@
 
 h1 {
     text-align: center;
-    color: #9B3922;
+    color:gray;
     text-shadow: black 0.1em 0.1em 0.2em;
     margin-bottom: 20px;
 }
@@ -94,7 +94,7 @@ input {
 }
 
 input:focus {
-    border-color: #9B3922;
+    border-color:gray;
     outline: none;
 }
 
@@ -103,7 +103,7 @@ input:focus {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #9B3922;
+    background-color:gray;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -113,7 +113,7 @@ input:focus {
 .submit-button:hover,
 .logout-button:hover {
     background-color: #222831;
-    color: #9B3922;
+    color:gray;
 }
 
 .logout-button {
@@ -126,5 +126,5 @@ input:focus {
     object-fit: cover;
     border-radius: 10%;
     margin: 20px auto;
-    border: 2px solid #9B3922;
+    border: 2px solidgray;
 }

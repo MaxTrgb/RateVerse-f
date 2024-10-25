@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import linksConfig from '../config/linksConfig';
-
+import topArrow from '../assets/icons8-arrow-50.png';
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,7 +32,7 @@ const Footer = () => {
     <div>
       {isVisible && (
         <button onClick={scrollToTop} className="backToTopBtn">
-          <img src={linksConfig.backToTopIcon} alt="Back to Top" />
+          <img src={topArrow} alt="Back to Top" />
         </button>
       )}
 

@@ -74,16 +74,16 @@ const PostGrid = ({ userId, userName }) => {
     );
 
     return (
-        <div>
-
+        <div className='postGridContainer'>
             {!userId
-                ? <Tools
-                    onSortChange={handleSortChange}
-                    onSearchChange={setSearchTerm}
-                    activeSort={sortCriteria}
-                />
-                : <div className='postTitleContainer'><h2 className='postTitle'>{userName}'s Posts</h2></div>}
-            <div className='postGrid'>
+                    ? <Tools
+                        onSortChange={handleSortChange}
+                        onSearchChange={setSearchTerm}
+                        activeSort={sortCriteria}
+                    />
+                    : <div className='postTitleContainer'><h2 className='postTitle'>{userName}'s Posts</h2></div>}
+            <div className='postGrid'>              
+                    
                 {filteredPosts.map(post => (
                     <PostItem
                         key={post.id}
@@ -97,12 +97,9 @@ const PostGrid = ({ userId, userName }) => {
                         createdAt={post.date}
                         authorName={post.user.name}
                         authorId={post.user.id}
-
                     />
-
                 ))}
             </div>
-
         </div>
     );
 }

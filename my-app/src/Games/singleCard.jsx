@@ -150,7 +150,7 @@ const SingleCard = () => {
             <Circles
                 height="500"
                 width="500"
-                color="#9B3922"
+                color="gray"
                 ariaLabel="circles-loading"
                 wrapperStyle={{}}
                 wrapperClass=""
@@ -193,7 +193,7 @@ const SingleCard = () => {
                             <h1>{post.title}</h1>
 
                             <p className='genre'>{post.genre?.name || 'No genre available'}</p>
-                            <p>{post.content}</p>
+                            <p className='singlePostContent'>{post.content}</p>
 
                             {userId && post.user.id === parseInt(userId, 10) && (
                                 <div className='postActions'>
