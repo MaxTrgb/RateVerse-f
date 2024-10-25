@@ -1,6 +1,7 @@
 .user-page {
     width: 50%;
     height: 100%;
+
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.9);
     color: lightgray;
@@ -41,7 +42,7 @@ h1 {
 }
 
 .image-upload-input {
-    width: 50%;
+    width: 75%;
 }
 
 .user-info {
