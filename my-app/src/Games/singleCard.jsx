@@ -4,6 +4,7 @@ import { Rate, Input, Button, message } from 'antd';
 import Header from '../Home/Header';
 import Footer from '../Home/Footer';
 import { Circles } from 'react-loader-spinner';
+import MediaComponent from './mediaComponent';
 
 const SingleCard = () => {
     const { id } = useParams();
@@ -192,9 +193,7 @@ const SingleCard = () => {
                             </p>
                         </div>
                         <div>
-                            {mediaType === 'unknown' && <img src={post.image} alt="Media" className="singleCard-media" />}
-                            {mediaType === 'image' && <img src={post.image} alt="Media" className="singleCard-media" />}
-                            {mediaType === 'video' && <video src={post.image} controls className="singleCard-media" />}
+                            <MediaComponent mediaType={mediaType} mediaSrc={post.image}/>
                         </div>
 
                         <div className="singleCard-details">
