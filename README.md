@@ -1,6 +1,6 @@
-RateVerse - rate and review video games!
-
-RateVerse is a web application that allows users to rate and review video games. Users can explore a vast library of games, create posts about their favorite titles, and engage with the community by commenting and rating those posts.
+#RateVerse
+Rate and review video games!
+Users can explore a vast library of games, create posts about their favorite titles, and engage with the community by commenting and rating those posts.
 
 Features
 User registration and authentication (sign up, login, logout)
